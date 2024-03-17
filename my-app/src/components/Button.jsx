@@ -1,6 +1,7 @@
 import clsx from "clsx"
 
 const variants = {
+  success: "bg-green-500 active:bg-green-700 text-white",
   primary: "bg-indigo-600 active:bg-indigo-700 text-white",
   danger: "bg-red-500 active:bg-red-600 text-white",
 }
