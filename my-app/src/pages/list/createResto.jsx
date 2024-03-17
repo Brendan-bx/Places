@@ -8,8 +8,8 @@ import { Formik } from "formik"
 import * as yup from "yup"
 
 const initialValues = {
-  description: "",
-  isDone: false,
+  Name: "",
+  Adresse: "",
 }
 const validationSchema = yup.object({
   Name: nameValidator,
@@ -38,7 +38,8 @@ const CreateRestoPage = () => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      <Form className="flex justify-center">
+        <Form className="flex justify-center" >
+          <p className="text-3xl m-4">Add a restaurant</p>
         <FormField
           className="w-80 text-neutral-950" 
           name="Name"
@@ -64,7 +65,15 @@ const CreateRestoPage = () => {
           label="Pays"
           />
           <FormField
-            
+          className="w-80"
+          name="cuisineType"
+          placeholder=""
+          label="Type de cuisine"
+          />
+          <FormField
+          className="w-80"
+          name="Stars"
+          label="Stars"
           />
         <Button type="submit">Create</Button>
       </Form>

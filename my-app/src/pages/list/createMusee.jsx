@@ -38,7 +38,8 @@ const CreateMuseePage = () => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      <Form className="flex justify-center">
+        <Form className="flex justify-center">
+          <p className="text-3xl m-4">Ajouter un musée</p>
         <FormField
           className="w-80 text-neutral-950" 
           name="Name"
@@ -64,7 +65,27 @@ const CreateMuseePage = () => {
           label="Pays"
           />
           <FormField
-            
+          className="w-80"
+          name="Art"
+          placeholder="Entrez un courant artistique ..."
+          label="Courant artistique"
+          />
+          <FormField
+            className="w-80"
+            name="typeArt"
+            placeholder="Entrez un type d'art ..."
+            label="Type d'art"
+          />
+          <FormField
+            name="isFree"
+            type="checkbox"
+            label="Payant?"
+          />
+          <FormField
+            className="w-80"
+            name="Price"
+            label="Prix"
+            placeholder="Entrez un prix ..."
           />
         <Button type="submit">Create</Button>
       </Form>
