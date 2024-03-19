@@ -1,93 +1,112 @@
-import Image from "next/image";
-import Header from "@/components/Header";
-import Link from "next/link";
-import { Button } from "@/components/Button";
-import clsx from "clsx";
-
+import Header from '@/components/Header'
+import { Button } from '@/components/Button'
+import { Formik } from 'formik'
+import { FormField } from '@/components/FormField'
+import { capitalizeFirstLetter } from '@/utils/functions'
+import { lieuTypes } from '@/utils/constants'
 
 
 const products = [
-  {
-    id: 1,
-    name: 'Earthen Bottle',
-    href: '#',
-    price: '$48',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-    imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-  },
-  {
-    id: 2,
-    name: 'Nomad Tumbler',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-    imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-  },
-  {
-    id: 3,
-    name: 'Focus Paper Refill',
-    href: '#',
-    price: '$89',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-  },
-  {
-    id: 4,
-    name: 'Machined Mechanical Pencil',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-  },
-  // More products...
+    {
+        id: 1,
+        name: 'Earthen Bottle',
+        href: '#',
+        price: '$48',
+        imageSrc:
+            'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
+        imageAlt:
+            'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
+    },
+    {
+        id: 2,
+        name: 'Nomad Tumbler',
+        href: '#',
+        price: '$35',
+        imageSrc:
+            'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+        imageAlt:
+            'Olive drab green insulated bottle with flared screw lid and flat top.',
+    },
+    {
+        id: 3,
+        name: 'Focus Paper Refill',
+        href: '#',
+        price: '$89',
+        imageSrc:
+            'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+        imageAlt:
+            'Person using a pen to cross a task off a productivity paper card.',
+    },
+    {
+        id: 4,
+        name: 'Machined Mechanical Pencil',
+        href: '#',
+        price: '$35',
+        imageSrc: 'dfgjdfgjshfglqjkdfhglksjdfhglksjdfghlkjh',
+    },
+    {
+        id: 5,
+        name: 'Machined Mechanical Pencil',
+        href: '#',
+        price: '$35',
+        imageSrc: 'dfgjdfgjshfglqjkdfhglksjdfhglksjdfghlkjh',
+    },
+    {
+        id: 5,
+        name: 'Machined Mechanical Pencil',
+        href: '#',
+        price: '$35',
+        imageSrc: 'dfgjdfgjshfglqjkdfhglksjdfhglksjdfghlkjh',
+    },
+    // More products...
 ]
 
-
 export default function Home() {
-  return (
-    <div>
-      <Header />
-       <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
+    return (
+        <>
+            <Header />
+            <div class="flex flex-wrap">
+                <section class="w-[183vh] h-20 mx-36 ">
+                    <div className=" max-w-2xl mx-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                        <h2>Products</h2>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
-            <a key={product.id} href={product.href} className="group">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center group-hover:opacity-75"
-                />
-              </div>
-              <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
-              <div className="flex justify-around">
-
-              <Button
-            
-            variant="success"
-            size="md"
-            className="hidden group-hover:inline"
-            >
-            EDIT
-          </Button>
-          <Button
-            
-            variant="danger"
-            size="md"
-            className="hidden group-hover:inline"
-            >
-            DELETE
-          </Button>
+                        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 grid-cols-3 xl:gap-x-8">
+                            {products.map((product) => (
+                                <a
+                                    key={product.id}
+                                    href={product.href}
+                                    className="group border-solid border-2 border-sky-500"
+                                >
+                                    <h3 className="mt-4 text-sm text-gray-700">
+                                        {product.name}
+                                    </h3>
+                                    <p className="mt-1 text-lg font-medium text-gray-900">
+                                        {product.price}
+                                    </p>
+                                    <div className="flex justify-around">
+                                        <Button
+                                            variant="primary"
+                                            size="md"
+                                            className="hidden group-hover:inline"
+                                        >
+                                            INFOS
+                                        </Button>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                <aside class="p-4 w-36 h-36">
+                    <p>Choix du lieu</p>
+                    <select className='border-solid border-2 border-gray-600'>
+                        {lieuTypes.map(lieuType => (
+                            <option value={lieuType}>{capitalizeFirstLetter(lieuType)}</option>
+                        ))}
+                    </select>
+                            
+                </aside>
             </div>
-            </a>
-            
-          ))}
-        </div>
-      </div>
-    </div>
-    </div>
-  );
+        </>
+    )
 }

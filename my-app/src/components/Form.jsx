@@ -1,11 +1,13 @@
-import clsx from "clsx"
-import { Form as FormikForm } from "formik"
-import { twMerge } from "tailwind-merge"
+import clsx from 'clsx'
+import { Form as FormikForm } from 'formik'
+import { twMerge } from 'tailwind-merge'
 
 export const Form = ({ className, ...otherProps }) => (
-  <FormikForm
-    className={twMerge(clsx("flex flex-col gap-4 items-center m-20", className))}
-    noValidate
-    {...otherProps}
-  />
+    <FormikForm
+        className={twMerge(
+            clsx('flex flex-col gap-4 items-center m-20', className)
+        )}
+        noValidate
+        {...otherProps}
+    />
 )
