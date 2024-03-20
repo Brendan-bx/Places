@@ -85,6 +85,7 @@ export default function Home() {
                                     </p>
                                     <div className="flex justify-around">
                                         <Button
+                                            
                                             variant="primary"
                                             size="md"
                                             className="hidden group-hover:inline"
@@ -98,7 +99,7 @@ export default function Home() {
                     </div>
                 </section>
                 <aside class="p-4 w-36 h-36">
-                    <p>Choix du lieu</p>
+                    <p>Places</p>
                     <select className='border-solid border-2 border-gray-600'>
                         {lieuTypes.map(lieuType => (
                             <option value={lieuType}>{capitalizeFirstLetter(lieuType)}</option>

@@ -1,4 +1,4 @@
-import { avgPrice, cuisineTypes, stars } from '@/utils/constants'
+import { cuisineTypes } from '@/utils/constants'
 import { Schema } from 'mongoose'
 
 export const listResto = new Schema({
@@ -32,14 +32,11 @@ export const listResto = new Schema({
         required: true,
     },
     stars: {
-        type: stars,
+        type: Number,
         required: true,
     },
     averagePrice: {
-        type: avgPrice,
+        type: Number,
         required: true,
     },
 })
-
-
-

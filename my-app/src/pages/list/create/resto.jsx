@@ -2,13 +2,13 @@ import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
-import { avgPrice, cuisineTypes, etoiles } from '@/utils/constants'
+import { avgPrice, cuisineTypes, stars } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     nameValidator,
-    adresseValidator,
+    addressValidator,
     postalValidator,
-    paysValidator,
+    countryValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -16,28 +16,28 @@ import * as yup from 'yup'
 
 const initialValues = {
     name: '',
-    adresse: '',
+    address: '',
     codePostal: '',
-    pays: '',
+    country: '',
     cuisineType: ''
 }
 const validationSchema = yup.object({
     name: nameValidator,
-    adresse: adresseValidator,
+    address: addressValidator,
     codePostal: postalValidator,
-    pays: paysValidator,
+    country: countryValidator,
     cuisineType: yup.string().oneOf(cuisineTypes)
 })
 const CreateRestoPage = () => {
     const handleSubmit = async (
-        { name, adresse, codePostal, pays },
+        { name, address, codePostal, country },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
             name,
-            adresse,
+            address,
             codePostal,
-            pays,
+            country,
         })
 
         resetForm()
@@ -57,33 +57,33 @@ const CreateRestoPage = () => {
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"
-                        placeholder="Entrez le nom du lieu ..."
-                        label="Nom du lieu"
+                        placeholder="Type the place name ..."
+                        label="Place name"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="adresse"
-                        placeholder="Entrez une adresse ..."
-                        label="Adresse :"
+                        name="address"
+                        placeholder="Type the address ..."
+                        label="Address :"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
                         name="codePostal"
-                        placeholder="Entrez un code postal ... "
-                        label="Code postal"
+                        placeholder="Type the postal code ... "
+                        label="Postal code"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="pays"
-                        placeholder="Entrez un pays ..."
-                        label="Pays"
+                        name="country"
+                        placeholder="Type the country ..."
+                        label="Country"
                     />
                     <FormField
                         className="w-80"
                         as="select"
                         name="cuisineType"
                         placeholder=""
-                        label="Type de cuisine"
+                        label="Cuisine type"
                     >
                         {cuisineTypes.map(cuisineType => (
                             <option value={cuisineType}>{capitalizeFirstLetter(cuisineType)}</option>
@@ -92,20 +92,20 @@ const CreateRestoPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="etoiles"
+                        name="stars"
                         placeholder=""
-                        label="Etoiles"
+                        label="Stars"
                     >
-                        {etoiles.map(etoile => (
+                        {stars.map(etoile => (
                             <option value={etoile}>{ etoile }</option>
                         ))}
                     </FormField>
                     <FormField
                         className="w-80"
                         as="select"
-                        name="prix"
+                        name="price"
                         placeholder=""
-                        label="Prix"
+                        label="Average price"
                     >
                         {avgPrice.map(avgPrice => (
                             <option value={avgPrice}>{ avgPrice}</option>

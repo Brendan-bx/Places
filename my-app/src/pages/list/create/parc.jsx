@@ -6,36 +6,36 @@ import Header from '@/components/Header'
 import { avgPrice, parcTypes } from '@/utils/constants'
 import {
     nameValidator,
-    adresseValidator,
+    addressValidator,
     postalValidator,
-    paysValidator,
+    countryValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
-    Name: '',
-    Adresse: '',
-    Code_Postal: '',
-    Pays: '',
+    name: '',
+    address: '',
+    postalCode: '',
+    country: '',
 }
 const validationSchema = yup.object({
-    Name: nameValidator,
-    Adresse: adresseValidator,
-    Code_Postal: postalValidator,
-    Pays: paysValidator,
+    name: nameValidator,
+    address: addressValidator,
+    postalCode: postalValidator,
+    country: countryValidator,
 })
 const CreateParcPage = () => {
     const handleSubmit = async (
-        { Name, Adresse, Code_Postal, Pays },
+        { name, address, postalCode, country },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
-            Name,
-            Adresse,
-            Code_Postal,
-            Pays,
+            name,
+            address,
+            postalCode,
+            country,
         })
 
         resetForm()
@@ -51,37 +51,37 @@ const CreateParcPage = () => {
                 validationSchema={validationSchema}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Ajouter un parc</p>
+                    <p className="text-3xl m-4">Add a parc</p>
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Name"
-                        placeholder="Entrez le nom du lieu ..."
-                        label="Nom du lieu"
+                        name="name"
+                        placeholder="Type the place name ..."
+                        label="Place name"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Adresse"
-                        placeholder="Entrez une adresse ..."
-                        label="Adresse :"
+                        name="address"
+                        placeholder="Type the address ..."
+                        label="Address "
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Code_Postal"
-                        placeholder="Entrez un code postal ... "
-                        label="Code postal"
+                        name="postalCode"
+                        placeholder="Type the postal code ... "
+                        label="Postal Code"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Pays"
-                        placeholder="Entrez un pays ..."
-                        label="Pays"
+                        name="country"
+                        placeholder="Type the country ..."
+                        label="Country"
                     />
                     <FormField
                         className="w-80"
                         as="select"
                         name="parcType"
                         placeholder=""
-                        label="Type de parc"
+                        label="Parc type"
                     >
                         {parcTypes.map(parcType => (
                             <option value={parcType}>{capitalizeFirstLetter(parcType)}</option>
@@ -92,13 +92,13 @@ const CreateParcPage = () => {
                         type="checkbox"
                         label="Public ?"
                     />
-                    <FormField name="isFree" type="checkbox" label="Payant ?" />
+                    <FormField name="isFree" type="checkbox" label="Fee ?" />
                     <FormField
                         className="w-80"
                         as="select"
                         name="price"
                         placeholder=""
-                        label="Prix"
+                        label="Average price"
                     >
                         {avgPrice.map(avgPrice => (
                             <option value={avgPrice}>{capitalizeFirstLetter(avgPrice)}</option>

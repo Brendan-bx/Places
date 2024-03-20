@@ -6,9 +6,9 @@ import { art, artType, avgPrice } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     nameValidator,
-    adresseValidator,
+    addressValidator,
     postalValidator,
-    paysValidator,
+    countryValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -20,20 +20,20 @@ const initialValues = {
 }
 const validationSchema = yup.object({
     Name: nameValidator,
-    Adresse: adresseValidator,
-    Code_Postal: postalValidator,
-    Pays: paysValidator,
+    Address: addressValidator,
+    postalCode: postalValidator,
+    country: countryValidator,
 })
 const CreateMuseePage = () => {
     const handleSubmit = async (
-        { Name, Adresse, Code_Postal, Pays },
+        { name, address, postalCode, country },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
-            Name,
-            Adresse,
-            Code_Postal,
-            Pays,
+            name,
+            address,
+            postalCode,
+            country,
         })
 
         resetForm()
@@ -52,34 +52,34 @@ const CreateMuseePage = () => {
                     <p className="text-3xl m-4">Ajouter un musée</p>
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Name"
-                        placeholder="Entrez le nom du lieu ..."
-                        label="Nom du lieu"
+                        name="name"
+                        placeholder="Type the place name ..."
+                        label="Place name"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Adresse"
-                        placeholder="Entrez une adresse ..."
-                        label="Adresse :"
+                        name="address"
+                        placeholder="Type the address ..."
+                        label="Address "
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Code_Postal"
-                        placeholder="Entrez un code postal ... "
-                        label="Code postal"
+                        name="postalCode"
+                        placeholder="Type the postal code ... "
+                        label="Postal Code"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="Pays"
-                        placeholder="Entrez un pays ..."
-                        label="Pays"
+                        name="country"
+                        placeholder="Type the country ..."
+                        label="Country"
                     />
                     <FormField
                         className="w-80"
                         as="select"
                         name="art"
                         placeholder=""
-                        label="Courant artistique"
+                        label="Artistic movement"
                     >
                         {art.map(art => (
                             <option value={art}>{capitalizeFirstLetter(art)}</option>
@@ -90,19 +90,19 @@ const CreateMuseePage = () => {
                         as="select"
                         name="artType"
                         placeholder=""
-                        label="Type d'art"
+                        label="Art type"
                     >
                         {artType.map(artType => (
                             <option value={artType}>{capitalizeFirstLetter(artType)}</option>
                         ))}
                     </FormField>
-                    <FormField name="isFree" type="checkbox" label="Payant?" />
+                    <FormField name="isFree" type="checkbox" label="Fee ?" />
                     <FormField
                         className="w-80"
                         as="select"
                         name="price"
                         placeholder=""
-                        label="Prix"
+                        label="Average price"
                     >
                         {avgPrice.map(avgPrice => (
                             <option value={avgPrice}>{capitalizeFirstLetter(avgPrice)}</option>
