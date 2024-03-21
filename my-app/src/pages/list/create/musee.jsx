@@ -2,13 +2,13 @@ import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
-import { art, artType, avgPrice } from '@/utils/constants'
+import { artMovement, artType, avgPrice, isFree } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     nameValidator,
     addressValidator,
     postalValidator,
-    countryValidator,
+    cityValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -22,7 +22,7 @@ const validationSchema = yup.object({
     Name: nameValidator,
     Address: addressValidator,
     postalCode: postalValidator,
-    country: countryValidator,
+    country: cityValidator,
 })
 const CreateMuseePage = () => {
     const handleSubmit = async (
@@ -64,6 +64,12 @@ const CreateMuseePage = () => {
                     />
                     <FormField
                         className="w-80 text-neutral-950"
+                        name="city"
+                        placeholder="Type the city ..."
+                        label="City"
+                    />
+                    <FormField
+                        className="w-80 text-neutral-950"
                         name="postalCode"
                         placeholder="Type the postal code ... "
                         label="Postal Code"
@@ -77,12 +83,12 @@ const CreateMuseePage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="art"
+                        name="artMovement"
                         placeholder=""
                         label="Artistic movement"
                     >
-                        {art.map(art => (
-                            <option value={art}>{capitalizeFirstLetter(art)}</option>
+                        {artMovement.map(artMovement => (
+                            <option value={artMovement}>{capitalizeFirstLetter(artMovement)}</option>
                         ))}
                     </FormField>
                     <FormField
@@ -96,8 +102,16 @@ const CreateMuseePage = () => {
                             <option value={artType}>{capitalizeFirstLetter(artType)}</option>
                         ))}
                     </FormField>
-                    <FormField name="isFree" type="checkbox" label="Fee ?" />
+
                     <FormField
+                        className="w-80"
+                        name="isFree"
+                        type="checkbox"
+                        label="Free or fee ?">
+                        {isFree.map(isFree => (
+                            <option value={isFree}>{capitalizeFirstLetter(isFree)}</option>
+                        ))}
+                    </FormField>                    <FormField
                         className="w-80"
                         as="select"
                         name="price"

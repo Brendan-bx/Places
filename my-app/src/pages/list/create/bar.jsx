@@ -22,7 +22,7 @@ const validationSchema = yup.object({
     name: nameValidator,
     address: addressValidator,
     postalCode: postalValidator,
-    country: countryValidator,
+    country: cityValidator,
 })
 const CreateBarPage = () => {
     const handleSubmit = async (
@@ -61,6 +61,12 @@ const CreateBarPage = () => {
                         name="address"
                         placeholder="Type the address ..."
                         label="Address"
+                    />
+                    <FormField
+                        className="w-80 text-neutral-950"
+                        name="city"
+                        placeholder="Type the city ..."
+                        label="City"
                     />
                     <FormField
                         className="w-80 text-neutral-950"

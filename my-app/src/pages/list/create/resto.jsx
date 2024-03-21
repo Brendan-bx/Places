@@ -8,7 +8,7 @@ import {
     nameValidator,
     addressValidator,
     postalValidator,
-    countryValidator,
+    cityValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -25,7 +25,7 @@ const validationSchema = yup.object({
     name: nameValidator,
     address: addressValidator,
     codePostal: postalValidator,
-    country: countryValidator,
+    country: cityValidator,
     cuisineType: yup.string().oneOf(cuisineTypes)
 })
 const CreateRestoPage = () => {
@@ -65,6 +65,12 @@ const CreateRestoPage = () => {
                         name="address"
                         placeholder="Type the address ..."
                         label="Address :"
+                    />
+                    <FormField
+                        className="w-80 text-neutral-950"
+                        name="city"
+                        placeholder="Type the city ..."
+                        label="City"
                     />
                     <FormField
                         className="w-80 text-neutral-950"

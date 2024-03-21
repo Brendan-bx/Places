@@ -1,7 +1,7 @@
-import { avgPrice, isFree, isPrivate, lieuTypes, parcTypes, stars } from '@/utils/constants'
+import { avgPrice, lieuTypes, artMovement, artType, stars } from '@/utils/constants'
 import { Schema } from 'mongoose'
 
-export const listParcs = new Schema({
+export const listMuseum = new Schema({
     type: {
         type: String,
         required: true,
@@ -23,23 +23,18 @@ export const listParcs = new Schema({
         type: Number,
         required: true,
     },
-    country: {
+    Country: {
         type: String,
         required: true,
     },
-    parcTypes: {
-        enum: parcTypes,
+    artType: {
+        enum: artType,
         required: true,
-    },
-    isFree: {
-        type: String,
-        required: true,
-        enum: isFree,
-    },
-    isPrivate: {
-        type: String,
-        required: true,
-        enum: isPrivate
+  },
+  artMovement: {
+    type: String,
+    required: true,
+    enum: artMovement,
     },
     stars: {
         type: String,

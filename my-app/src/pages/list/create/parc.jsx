@@ -3,12 +3,12 @@ import { Form } from '@/components/Form'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
-import { avgPrice, parcTypes } from '@/utils/constants'
+import { avgPrice, isFree, isPrivate, parcTypes } from '@/utils/constants'
 import {
     nameValidator,
     addressValidator,
-    postalValidator,
-    countryValidator,
+    postalCodeValidator,
+    cityValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -23,8 +23,8 @@ const initialValues = {
 const validationSchema = yup.object({
     name: nameValidator,
     address: addressValidator,
-    postalCode: postalValidator,
-    country: countryValidator,
+    postalCode: postalCodeValidator,
+    country: cityValidator,
 })
 const CreateParcPage = () => {
     const handleSubmit = async (
@@ -66,6 +66,12 @@ const CreateParcPage = () => {
                     />
                     <FormField
                         className="w-80 text-neutral-950"
+                        name="city"
+                        placeholder="Type the city ..."
+                        label="City"
+                    />
+                    <FormField
+                        className="w-80 text-neutral-950"
                         name="postalCode"
                         placeholder="Type the postal code ... "
                         label="Postal Code"
@@ -88,11 +94,24 @@ const CreateParcPage = () => {
                         ))}
                     </FormField>
                     <FormField
+                        className="w-80"
                         name="isPrivate"
+                        as="select"
+                        label="Public or private ?"
+                    >
+                        {isPrivate.map(isPrivate => (
+                            <option value={isPrivate}>{capitalizeFirstLetter(isPrivate)}</option>
+                        ))}
+                    </FormField>
+                    <FormField
+                        className="w-80"
+                        name="isFree"
                         type="checkbox"
-                        label="Public ?"
-                    />
-                    <FormField name="isFree" type="checkbox" label="Fee ?" />
+                        label="Free or fee ?">
+                        {isFree.map(isFree => (
+                            <option value={isFree}>{capitalizeFirstLetter(isFree)}</option>
+                        ))}
+                    </FormField>
                     <FormField
                         className="w-80"
                         as="select"
