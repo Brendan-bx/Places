@@ -5,10 +5,15 @@ import Header from '@/components/Header'
 import { avgPrice, cuisineTypes, stars } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
+    lieuTypesValidator,
     nameValidator,
     addressValidator,
-    postalValidator,
     cityValidator,
+    postalCodeValidator,
+    countryValidator,
+    cuisineTypesValidator,
+    starsValidator,
+    avgPriceValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -22,22 +27,31 @@ const initialValues = {
     cuisineType: ''
 }
 const validationSchema = yup.object({
+    lieuTypes: lieuTypesValidator,
     name: nameValidator,
     address: addressValidator,
-    codePostal: postalValidator,
-    country: cityValidator,
-    cuisineType: yup.string().oneOf(cuisineTypes)
+    city: cityValidator,
+    postalCode: postalCodeValidator,
+    country: countryValidator,
+    cuisineTypes: cuisineTypesValidator,
+    stars: starsValidator,
+    avgPrice: avgPriceValidator
 })
 const CreateRestoPage = () => {
     const handleSubmit = async (
-        { name, address, codePostal, country },
+        { lieuTypes ,name, address, city ,postalCode, country, cuisineTypes, stars, avgPrice },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
+            lieuTypes,
             name,
             address,
-            codePostal,
+            city,
+            postalCode,
             country,
+            cuisineTypes,
+            stars,
+            avgPrice
         })
 
         resetForm()
@@ -74,7 +88,7 @@ const CreateRestoPage = () => {
                     />
                     <FormField
                         className="w-80 text-neutral-950"
-                        name="codePostal"
+                        name="postalCode"
                         placeholder="Type the postal code ... "
                         label="Postal code"
                     />
@@ -87,7 +101,7 @@ const CreateRestoPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="cuisineType"
+                        name="cuisineTypes"
                         placeholder=""
                         label="Cuisine type"
                     >

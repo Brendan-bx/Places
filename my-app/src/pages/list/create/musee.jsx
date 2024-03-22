@@ -5,10 +5,16 @@ import Header from '@/components/Header'
 import { artMovement, artType, avgPrice, isFree } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
+    lieuTypesValidator,
     nameValidator,
     addressValidator,
-    postalValidator,
     cityValidator,
+    postalCodeValidator,
+    countryValidator,
+    artMovementValidator,
+    artTypeValidator,
+    isFreeValidator,
+    avgPriceValidator
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -19,21 +25,33 @@ const initialValues = {
     isDone: false,
 }
 const validationSchema = yup.object({
-    Name: nameValidator,
-    Address: addressValidator,
-    postalCode: postalValidator,
-    country: cityValidator,
+    lieuTypes: lieuTypesValidator,
+    name: nameValidator,
+    address: addressValidator,
+    city: cityValidator,
+    postalCode: postalCodeValidator,
+    country: countryValidator,
+    artMovement: artMovementValidator,
+    artType: artTypeValidator,
+    isFree: isFreeValidator,
+    avgPrice: avgPriceValidator,
 })
 const CreateMuseePage = () => {
     const handleSubmit = async (
-        { name, address, postalCode, country },
+        { lieuTypes ,name, address, city, postalCode, country, artMovement, artType, isFree ,avgPrice},
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
+            lieuTypes,
             name,
             address,
+            city,
             postalCode,
             country,
+            artMovement,
+            artType,
+            isFree,
+            avgPrice,
         })
 
         resetForm()

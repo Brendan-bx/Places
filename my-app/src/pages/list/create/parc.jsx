@@ -5,10 +5,16 @@ import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
 import { avgPrice, isFree, isPrivate, parcTypes } from '@/utils/constants'
 import {
+    lieuTypesValidator,
     nameValidator,
     addressValidator,
-    postalCodeValidator,
     cityValidator,
+    postalCodeValidator,
+    countryValidator,
+    parcTypesValidator,
+    isPrivateValidator,
+    isFreeValidator,
+    avgPriceValidator
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -21,21 +27,33 @@ const initialValues = {
     country: '',
 }
 const validationSchema = yup.object({
+    lieuTypes: lieuTypesValidator,
     name: nameValidator,
     address: addressValidator,
+    city: cityValidator,
     postalCode: postalCodeValidator,
-    country: cityValidator,
+    country: countryValidator,
+    parcTypes: parcTypesValidator,
+    isPrivate: isPrivateValidator,
+    isFree: isFreeValidator,
+    avgPrice: avgPriceValidator,
 })
 const CreateParcPage = () => {
     const handleSubmit = async (
-        { name, address, postalCode, country },
+        { lieuTypes ,name, address, city, postalCode, country, parcTypes, isPrivate, isFree, avgPrice },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
+            lieuTypes,
             name,
             address,
+            city,
             postalCode,
             country,
+            parcTypes,
+            isPrivate,
+            isFree,
+            avgPrice
         })
 
         resetForm()

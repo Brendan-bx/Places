@@ -5,10 +5,16 @@ import Header from '@/components/Header'
 import { avgPrice, barTypes } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
+    lieuTypesValidator,
     nameValidator,
     addressValidator,
-    postalValidator,
+    cityValidator,
+    postalCodeValidator,
     countryValidator,
+    barTypesValidator,
+    avgPriceValidator,
+    starsValidator
+
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -19,21 +25,31 @@ const initialValues = {
     isDone: false,
 }
 const validationSchema = yup.object({
+    lieuTypes: lieuTypesValidator,
     name: nameValidator,
     address: addressValidator,
-    postalCode: postalValidator,
-    country: cityValidator,
+    city: cityValidator,
+    postalCode: postalCodeValidator,
+    country: countryValidator,
+    barTypes: barTypesValidator,
+    avgPrice: avgPriceValidator,
+    stars: starsValidator
 })
 const CreateBarPage = () => {
     const handleSubmit = async (
-        { name, address, postalCode, country },
+        { lieuTypes ,name, address, city, postalCode, country, barTypes, avgPrice ,stars },
         { resetForm }
     ) => {
         await axios.post('http://localhost:3000/api/', {
+            lieuTypes,
             name,
             address,
+            city,
             postalCode,
             country,
+            barTypes,
+            avgPrice,
+            stars
         })
 
         resetForm()
@@ -83,7 +99,7 @@ const CreateBarPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="barType"
+                        name="barTypes"
                         placeholder=""
                         label="Bar type"
                     >
