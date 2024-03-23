@@ -40,7 +40,7 @@ const CreateBarPage = () => {
         { lieuTypes ,name, address, city, postalCode, country, barTypes, avgPrice ,stars },
         { resetForm }
     ) => {
-        await axios.post('http://localhost:3000/api/', {
+        await axios.post('http://localhost:3000/api/places', {
             lieuTypes,
             name,
             address,

@@ -41,7 +41,7 @@ const CreateMuseePage = () => {
         { lieuTypes ,name, address, city, postalCode, country, artMovement, artType, isFree ,avgPrice},
         { resetForm }
     ) => {
-        await axios.post('http://localhost:3000/api/', {
+        await axios.post('http://localhost:3000/api/places', {
             lieuTypes,
             name,
             address,

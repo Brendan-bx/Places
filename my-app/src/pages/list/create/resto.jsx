@@ -42,7 +42,7 @@ const CreateRestoPage = () => {
         { lieuTypes ,name, address, city ,postalCode, country, cuisineTypes, stars, avgPrice },
         { resetForm }
     ) => {
-        await axios.post('http://localhost:3000/api/', {
+        await axios.post('http://localhost:3000/list/create/resto', {
             lieuTypes,
             name,
             address,

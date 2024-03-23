@@ -1,7 +1,5 @@
 import Header from '@/components/Header'
 import { Button } from '@/components/Button'
-import { Formik } from 'formik'
-import { FormField } from '@/components/FormField'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import { lieuTypes } from '@/utils/constants'
 

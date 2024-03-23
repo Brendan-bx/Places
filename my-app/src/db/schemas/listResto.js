@@ -7,26 +7,6 @@ export const listResto = new Schema({
         required: true,
         enum: lieuTypes
     },
-    name: {
-        type: String,
-        required: true,
-    },
-    address: {
-        type: String,
-        required: true,
-    },
-    ville: {
-        type: String,
-        required: true,
-    },
-    postal: {
-        type: Number,
-        required: true,
-    },
-    country: {
-        type: String,
-        required: true,
-    },
     cuisineType: {
         enum: cuisineTypes,
         required: true,
