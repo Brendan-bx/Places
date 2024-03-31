@@ -14,15 +14,20 @@ import {
     artMovementValidator,
     artTypeValidator,
     isFreeValidator,
-    avgPriceValidator
+    avgPriceValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
-    description: '',
-    isDone: false,
+    name: '',
+    address: '',
+    postalCode: '',
+    country: '',
+    city: '',
+    artMovement: '',
+    artType: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -37,21 +42,9 @@ const validationSchema = yup.object({
     avgPrice: avgPriceValidator,
 })
 const CreateMuseePage = () => {
-    const handleSubmit = async (
-        { lieuTypes ,name, address, city, postalCode, country, artMovement, artType, isFree ,avgPrice},
-        { resetForm }
-    ) => {
+    const handleSubmit = async ({ values }, { resetForm }) => {
         await axios.post('http://localhost:3000/api/places', {
-            lieuTypes,
-            name,
-            address,
-            city,
-            postalCode,
-            country,
-            artMovement,
-            artType,
-            isFree,
-            avgPrice,
+            values,
         })
 
         resetForm()
@@ -105,8 +98,10 @@ const CreateMuseePage = () => {
                         placeholder=""
                         label="Artistic movement"
                     >
-                        {artMovement.map(artMovement => (
-                            <option value={artMovement}>{capitalizeFirstLetter(artMovement)}</option>
+                        {artMovement.map((artMovement) => (
+                            <option value={artMovement} key={artMovement}>
+                                {capitalizeFirstLetter(artMovement)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -116,28 +111,35 @@ const CreateMuseePage = () => {
                         placeholder=""
                         label="Art type"
                     >
-                        {artType.map(artType => (
-                            <option value={artType}>{capitalizeFirstLetter(artType)}</option>
+                        {artType.map((artType) => (
+                            <option value={artType} key={artType}>
+                                {capitalizeFirstLetter(artType)}
+                            </option>
                         ))}
                     </FormField>
-
                     <FormField
                         className="w-80"
                         name="isFree"
                         type="checkbox"
-                        label="Free or fee ?">
-                        {isFree.map(isFree => (
-                            <option value={isFree}>{capitalizeFirstLetter(isFree)}</option>
+                        label="Free or fee ?"
+                    >
+                        {isFree.map((isFree) => (
+                            <option value={isFree} key={isFree}>
+                                {capitalizeFirstLetter(isFree)}
+                            </option>
                         ))}
-                    </FormField>                    <FormField
+                    </FormField>{' '}
+                    <FormField
                         className="w-80"
                         as="select"
                         name="price"
                         placeholder=""
                         label="Average price"
                     >
-                        {avgPrice.map(avgPrice => (
-                            <option value={avgPrice}>{capitalizeFirstLetter(avgPrice)}</option>
+                        {avgPrice.map((avgPrice) => (
+                            <option value={avgPrice} key={avgPrice}>
+                                {capitalizeFirstLetter(avgPrice)}
+                            </option>
                         ))}
                     </FormField>
                     <Button type="submit">Create</Button>

@@ -14,7 +14,7 @@ import {
     parcTypesValidator,
     isPrivateValidator,
     isFreeValidator,
-    avgPriceValidator
+    avgPriceValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
@@ -25,6 +25,8 @@ const initialValues = {
     address: '',
     postalCode: '',
     country: '',
+    city: '',
+    parcTypes: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -39,21 +41,9 @@ const validationSchema = yup.object({
     avgPrice: avgPriceValidator,
 })
 const CreateParcPage = () => {
-    const handleSubmit = async (
-        { lieuTypes ,name, address, city, postalCode, country, parcTypes, isPrivate, isFree, avgPrice },
-        { resetForm }
-    ) => {
-        await axios.post('http://localhost:3000/api/places', {
-            lieuTypes,
-            name,
-            address,
-            city,
-            postalCode,
-            country,
-            parcTypes,
-            isPrivate,
-            isFree,
-            avgPrice
+    const handleSubmit = async ({ values }, { resetForm }) => {
+        await axios.post('http://localhost:3000/', {
+            values,
         })
 
         resetForm()
@@ -107,8 +97,10 @@ const CreateParcPage = () => {
                         placeholder=""
                         label="Parc type"
                     >
-                        {parcTypes.map(parcType => (
-                            <option value={parcType}>{capitalizeFirstLetter(parcType)}</option>
+                        {parcTypes.map((parcType) => (
+                            <option value={parcType} key={parcType}>
+                                {capitalizeFirstLetter(parcType)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -117,17 +109,22 @@ const CreateParcPage = () => {
                         as="select"
                         label="Public or private ?"
                     >
-                        {isPrivate.map(isPrivate => (
-                            <option value={isPrivate}>{capitalizeFirstLetter(isPrivate)}</option>
+                        {isPrivate.map((isPrivate) => (
+                            <option value={isPrivate} key={isPrivate}>
+                                {capitalizeFirstLetter(isPrivate)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
                         className="w-80"
                         name="isFree"
                         type="checkbox"
-                        label="Free or fee ?">
-                        {isFree.map(isFree => (
-                            <option value={isFree}>{capitalizeFirstLetter(isFree)}</option>
+                        label="Free or fee ?"
+                    >
+                        {isFree.map((isFree) => (
+                            <option value={isFree} key={isFree}>
+                                {capitalizeFirstLetter(isFree)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -137,8 +134,10 @@ const CreateParcPage = () => {
                         placeholder=""
                         label="Average price"
                     >
-                        {avgPrice.map(avgPrice => (
-                            <option value={avgPrice}>{capitalizeFirstLetter(avgPrice)}</option>
+                        {avgPrice.map((avgPrice) => (
+                            <option value={avgPrice} key={avgPrice}>
+                                {capitalizeFirstLetter(avgPrice)}
+                            </option>
                         ))}
                     </FormField>
                     <Button type="submit">Create</Button>

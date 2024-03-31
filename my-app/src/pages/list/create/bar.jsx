@@ -13,16 +13,19 @@ import {
     countryValidator,
     barTypesValidator,
     avgPriceValidator,
-    starsValidator
-
+    starsValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
-    description: '',
-    isDone: false,
+    name: '',
+    address: '',
+    postalCode: '',
+    country: '',
+    city: '',
+    barTypes: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -33,24 +36,11 @@ const validationSchema = yup.object({
     country: countryValidator,
     barTypes: barTypesValidator,
     avgPrice: avgPriceValidator,
-    stars: starsValidator
+    stars: starsValidator,
 })
 const CreateBarPage = () => {
-    const handleSubmit = async (
-        { lieuTypes ,name, address, city, postalCode, country, barTypes, avgPrice ,stars },
-        { resetForm }
-    ) => {
-        await axios.post('http://localhost:3000/api/places', {
-            lieuTypes,
-            name,
-            address,
-            city,
-            postalCode,
-            country,
-            barTypes,
-            avgPrice,
-            stars
-        })
+    const handleSubmit = async (values, { resetForm }) => {
+        await axios.post('http://localhost:3000/api/places', values)
 
         resetForm()
     }
@@ -103,8 +93,10 @@ const CreateBarPage = () => {
                         placeholder=""
                         label="Bar type"
                     >
-                        {barTypes.map(barType => (
-                            <option value={barType}>{capitalizeFirstLetter(barType)}</option>
+                        {barTypes.map((barType) => (
+                            <option value={barType} key={barType}>
+                                {capitalizeFirstLetter(barType)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -114,8 +106,10 @@ const CreateBarPage = () => {
                         placeholder=""
                         label="Average price"
                     >
-                        {avgPrice.map(avgPrice => (
-                            <option value={avgPrice}>{capitalizeFirstLetter(avgPrice)}</option>
+                        {avgPrice.map((avgPrice) => (
+                            <option value={avgPrice} key={avgPrice}>
+                                {capitalizeFirstLetter(avgPrice)}
+                            </option>
                         ))}
                     </FormField>
                     <Button type="submit">Create</Button>

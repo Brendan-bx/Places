@@ -3,7 +3,6 @@ import { Button } from '@/components/Button'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import { lieuTypes } from '@/utils/constants'
 
-
 const products = [
     {
         id: 1,
@@ -63,8 +62,8 @@ export default function Home() {
     return (
         <>
             <Header />
-            <div class="flex flex-wrap">
-                <section class="w-[183vh] h-20 mx-36 ">
+            <div className="flex flex-wrap">
+                <section className="w-[183vh] h-20 mx-36 ">
                     <div className=" max-w-2xl mx-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                         <h2>Products</h2>
 
@@ -83,7 +82,6 @@ export default function Home() {
                                     </p>
                                     <div className="flex justify-around">
                                         <Button
-                                            
                                             variant="primary"
                                             size="md"
                                             className="hidden group-hover:inline"
@@ -96,14 +94,15 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-                <aside class="p-4 w-36 h-36">
+                <aside className="p-4 w-36 h-36">
                     <p>Places</p>
-                    <select className='border-solid border-2 border-gray-600'>
-                        {lieuTypes.map(lieuType => (
-                            <option value={lieuType}>{capitalizeFirstLetter(lieuType)}</option>
+                    <select className="border-solid border-2 border-gray-600">
+                        {lieuTypes.map((lieuType) => (
+                            <option value={lieuType}>
+                                {capitalizeFirstLetter(lieuType)}
+                            </option>
                         ))}
                     </select>
-                            
                 </aside>
             </div>
         </>

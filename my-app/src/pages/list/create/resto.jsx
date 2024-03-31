@@ -22,9 +22,10 @@ import * as yup from 'yup'
 const initialValues = {
     name: '',
     address: '',
-    codePostal: '',
+    postalCode: '',
     country: '',
-    cuisineType: ''
+    city: '',
+    cuisineType: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -35,24 +36,14 @@ const validationSchema = yup.object({
     country: countryValidator,
     cuisineTypes: cuisineTypesValidator,
     stars: starsValidator,
-    avgPrice: avgPriceValidator
+    avgPrice: avgPriceValidator,
 })
 const CreateRestoPage = () => {
-    const handleSubmit = async (
-        { lieuTypes ,name, address, city ,postalCode, country, cuisineTypes, stars, avgPrice },
-        { resetForm }
-    ) => {
-        await axios.post('http://localhost:3000/list/create/resto', {
-            lieuTypes,
-            name,
-            address,
-            city,
-            postalCode,
-            country,
-            cuisineTypes,
-            stars,
-            avgPrice
-        })
+    const handleSubmit = async (values, { resetForm }) => {
+        await axios.post(
+            'http://localhost:3000/api/places/create/resto',
+            values
+        )
 
         resetForm()
     }
@@ -60,7 +51,6 @@ const CreateRestoPage = () => {
     return (
         <>
             <Header />
-
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -105,8 +95,10 @@ const CreateRestoPage = () => {
                         placeholder=""
                         label="Cuisine type"
                     >
-                        {cuisineTypes.map(cuisineType => (
-                            <option value={cuisineType}>{capitalizeFirstLetter(cuisineType)}</option>
+                        {cuisineTypes.map((cuisineType) => (
+                            <option value={cuisineType} key={cuisineType}>
+                                {capitalizeFirstLetter(cuisineType)}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -116,8 +108,10 @@ const CreateRestoPage = () => {
                         placeholder=""
                         label="Stars"
                     >
-                        {stars.map(etoile => (
-                            <option value={etoile}>{ etoile }</option>
+                        {stars.map((etoile) => (
+                            <option value={etoile} key={etoile}>
+                                {etoile}
+                            </option>
                         ))}
                     </FormField>
                     <FormField
@@ -127,8 +121,10 @@ const CreateRestoPage = () => {
                         placeholder=""
                         label="Average price"
                     >
-                        {avgPrice.map(avgPrice => (
-                            <option value={avgPrice}>{ avgPrice}</option>
+                        {avgPrice.map((avgPrice) => (
+                            <option value={avgPrice} key={avgPrice}>
+                                {avgPrice}
+                            </option>
                         ))}
                     </FormField>
                     <Button type="submit">Create</Button>
