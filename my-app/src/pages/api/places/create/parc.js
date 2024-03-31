@@ -18,15 +18,10 @@ const handle = mw(async (req, res) => {
             postalCode,
             country,
             parcTypes,
-            stars,
+            isPrivate,
+            isFree,
             avgPrice,
         } = req.body
-
-        if (!description) {
-            res.status(422).send({ error: 'missing description argument' })
-
-            return
-        }
 
         const newPlace = await createPlace(req.body)
 

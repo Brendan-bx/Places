@@ -2,54 +2,45 @@ import {
     avgPrice,
     isFree,
     isPrivate,
+    lieuTypes,
     parcTypes,
-    stars,
 } from '@/utils/constants'
 import { Schema } from 'mongoose'
 
 export const listParcs = new Schema({
+    ParcsType: {
+        type: String,
+        enum: lieuTypes[2],
+    },
     name: {
         type: String,
-        required: true,
     },
     address: {
         type: String,
-        required: true,
     },
-    ville: {
+    city: {
         type: String,
-        required: true,
     },
     postal: {
         type: Number,
-        required: true,
     },
     country: {
         type: String,
-        required: true,
     },
     parcTypes: {
-        enum: parcTypes,
-        required: true,
-    },
-    isFree: {
         type: String,
-        required: true,
-        enum: isFree,
+        enum: parcTypes,
     },
     isPrivate: {
         type: String,
-        required: true,
         enum: isPrivate,
     },
-    stars: {
+    isFree: {
         type: String,
-        required: true,
-        enum: stars,
+        enum: isFree,
     },
     averagePrice: {
-        type: String,
-        required: true,
+        type: Number,
         enum: avgPrice,
     },
 })

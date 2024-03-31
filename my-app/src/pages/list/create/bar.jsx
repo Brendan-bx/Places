@@ -40,7 +40,7 @@ const validationSchema = yup.object({
 })
 const CreateBarPage = () => {
     const handleSubmit = async (values, { resetForm }) => {
-        await axios.post('http://localhost:3000/api/places', values)
+        await axios.post('http://localhost:3000/api/places/create/bar', values)
 
         resetForm()
     }
@@ -55,7 +55,7 @@ const CreateBarPage = () => {
                 validationSchema={validationSchema}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Ajouter un bar</p>
+                    <p className="text-3xl m-4">Add a bar</p>
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"
@@ -102,7 +102,7 @@ const CreateBarPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="price"
+                        name="avgPrice"
                         placeholder=""
                         label="Average price"
                     >

@@ -4,41 +4,29 @@ import { Schema } from 'mongoose'
 export const listBar = new Schema({
     name: {
         type: String,
-        required: true,
     },
     address: {
         type: String,
-        required: true,
     },
-    ville: {
+    city: {
         type: String,
-        required: true,
     },
     postal: {
         type: Number,
-        required: true,
     },
     country: {
         type: String,
-        required: true,
     },
     barType: {
         type: String,
-        required: true,
         enum: lieuTypes,
     },
     barTypes: {
+        type: String,
         enum: barTypes,
-        required: true,
     },
-    stars: {
+    avgPrice: {
         type: String,
-        required: true,
-        enum: stars,
-    },
-    averagePrice: {
-        type: String,
-        required: true,
         enum: avgPrice,
     },
 })

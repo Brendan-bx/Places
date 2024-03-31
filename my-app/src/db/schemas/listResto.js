@@ -8,7 +8,7 @@ export const listResto = new Schema({
     address: {
         type: String,
     },
-    ville: {
+    city: {
         type: String,
     },
     postal: {
@@ -17,17 +17,16 @@ export const listResto = new Schema({
     country: {
         type: String,
     },
-    restoType: {
-        type: String,
-        enum: lieuTypes,
-    },
     cuisineType: {
+        type: String,
         enum: cuisineTypes,
     },
     stars: {
-        type: stars,
+        type: Number,
+        enum: stars,
     },
     averagePrice: {
-        type: avgPrice,
+        type: Number,
+        enum: avgPrice,
     },
 })

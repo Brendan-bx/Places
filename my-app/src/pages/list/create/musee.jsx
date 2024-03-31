@@ -2,7 +2,13 @@ import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
-import { artMovement, artType, avgPrice, isFree } from '@/utils/constants'
+import {
+    artMovement,
+    artType,
+    avgPrice,
+    barTypes,
+    isFree,
+} from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     lieuTypesValidator,
@@ -26,8 +32,6 @@ const initialValues = {
     postalCode: '',
     country: '',
     city: '',
-    artMovement: '',
-    artType: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -36,16 +40,15 @@ const validationSchema = yup.object({
     city: cityValidator,
     postalCode: postalCodeValidator,
     country: countryValidator,
-    artMovement: artMovementValidator,
     artType: artTypeValidator,
-    isFree: isFreeValidator,
-    avgPrice: avgPriceValidator,
+    artMovement: artMovementValidator,
 })
-const CreateMuseePage = () => {
-    const handleSubmit = async ({ values }, { resetForm }) => {
-        await axios.post('http://localhost:3000/api/places', {
-            values,
-        })
+const CreateBarPage = () => {
+    const handleSubmit = async (values, { resetForm }) => {
+        await axios.post(
+            'http://localhost:3000/api/places/create/museum',
+            values
+        )
 
         resetForm()
     }
@@ -60,7 +63,7 @@ const CreateMuseePage = () => {
                 validationSchema={validationSchema}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Ajouter un musée</p>
+                    <p className="text-3xl m-4">Add a museum</p>
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"
@@ -71,7 +74,7 @@ const CreateMuseePage = () => {
                         className="w-80 text-neutral-950"
                         name="address"
                         placeholder="Type the address ..."
-                        label="Address "
+                        label="Address"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
@@ -82,7 +85,7 @@ const CreateMuseePage = () => {
                     <FormField
                         className="w-80 text-neutral-950"
                         name="postalCode"
-                        placeholder="Type the postal code ... "
+                        placeholder="Type the Postal code ... "
                         label="Postal Code"
                     />
                     <FormField
@@ -94,21 +97,7 @@ const CreateMuseePage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="artMovement"
-                        placeholder=""
-                        label="Artistic movement"
-                    >
-                        {artMovement.map((artMovement) => (
-                            <option value={artMovement} key={artMovement}>
-                                {capitalizeFirstLetter(artMovement)}
-                            </option>
-                        ))}
-                    </FormField>
-                    <FormField
-                        className="w-80"
-                        as="select"
                         name="artType"
-                        placeholder=""
                         label="Art type"
                     >
                         {artType.map((artType) => (
@@ -119,20 +108,32 @@ const CreateMuseePage = () => {
                     </FormField>
                     <FormField
                         className="w-80"
+                        as="select"
+                        name="artMovement"
+                        label="Art movement"
+                    >
+                        {artMovement.map((artMovement) => (
+                            <option value={artMovement} key={artMovement}>
+                                {capitalizeFirstLetter(artMovement)}
+                            </option>
+                        ))}
+                    </FormField>
+                    <FormField
+                        className="w-80"
+                        as="select"
                         name="isFree"
-                        type="checkbox"
-                        label="Free or fee ?"
+                        label="Free or Fee ?"
                     >
                         {isFree.map((isFree) => (
                             <option value={isFree} key={isFree}>
                                 {capitalizeFirstLetter(isFree)}
                             </option>
                         ))}
-                    </FormField>{' '}
+                    </FormField>
                     <FormField
                         className="w-80"
                         as="select"
-                        name="price"
+                        name="avgPrice"
                         placeholder=""
                         label="Average price"
                     >
@@ -149,4 +150,4 @@ const CreateMuseePage = () => {
     )
 }
 
-export default CreateMuseePage
+export default CreateBarPage

@@ -1,9 +1,9 @@
 import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
-import { capitalizeFirstLetter } from '@/utils/functions'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
 import { avgPrice, isFree, isPrivate, parcTypes } from '@/utils/constants'
+import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     lieuTypesValidator,
     nameValidator,
@@ -41,10 +41,8 @@ const validationSchema = yup.object({
     avgPrice: avgPriceValidator,
 })
 const CreateParcPage = () => {
-    const handleSubmit = async ({ values }, { resetForm }) => {
-        await axios.post('http://localhost:3000/', {
-            values,
-        })
+    const handleSubmit = async (values, { resetForm }) => {
+        await axios.post('http://localhost:3000/api/places/create/parc', values)
 
         resetForm()
     }
@@ -52,7 +50,6 @@ const CreateParcPage = () => {
     return (
         <>
             <Header />
-
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -70,7 +67,7 @@ const CreateParcPage = () => {
                         className="w-80 text-neutral-950"
                         name="address"
                         placeholder="Type the address ..."
-                        label="Address "
+                        label="Address :"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
@@ -82,7 +79,7 @@ const CreateParcPage = () => {
                         className="w-80 text-neutral-950"
                         name="postalCode"
                         placeholder="Type the postal code ... "
-                        label="Postal Code"
+                        label="Postal code"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
@@ -93,7 +90,7 @@ const CreateParcPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="parcType"
+                        name="parcTypes"
                         placeholder=""
                         label="Parc type"
                     >
@@ -105,20 +102,20 @@ const CreateParcPage = () => {
                     </FormField>
                     <FormField
                         className="w-80"
-                        name="isPrivate"
                         as="select"
+                        name="isPrivate"
                         label="Public or private ?"
                     >
                         {isPrivate.map((isPrivate) => (
                             <option value={isPrivate} key={isPrivate}>
-                                {capitalizeFirstLetter(isPrivate)}
+                                {isPrivate}
                             </option>
                         ))}
                     </FormField>
                     <FormField
                         className="w-80"
                         name="isFree"
-                        type="checkbox"
+                        as="select"
                         label="Free or fee ?"
                     >
                         {isFree.map((isFree) => (
@@ -130,13 +127,12 @@ const CreateParcPage = () => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="price"
-                        placeholder=""
+                        name="avgPrice"
                         label="Average price"
                     >
                         {avgPrice.map((avgPrice) => (
                             <option value={avgPrice} key={avgPrice}>
-                                {capitalizeFirstLetter(avgPrice)}
+                                {avgPrice}
                             </option>
                         ))}
                     </FormField>
