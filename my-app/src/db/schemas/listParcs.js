@@ -8,9 +8,9 @@ import {
 import { Schema } from 'mongoose'
 
 export const listParcs = new Schema({
-    ParcsType: {
+    lieuTypes: {
         type: String,
-        enum: lieuTypes[2],
+        enum: lieuTypes,
     },
     name: {
         type: String,
@@ -21,7 +21,7 @@ export const listParcs = new Schema({
     city: {
         type: String,
     },
-    postal: {
+    postalCode: {
         type: Number,
     },
     country: {
@@ -39,7 +39,7 @@ export const listParcs = new Schema({
         type: String,
         enum: isFree,
     },
-    averagePrice: {
+    avgPrice: {
         type: String,
         enum: avgPrice,
     },

@@ -11,7 +11,6 @@ const handle = mw(async (req, res) => {
     }
 
     if (req.method === 'POST') {
-        console.log(req.body)
         const newPlace = await createPlace(req.body)
 
         res.send(newPlace)

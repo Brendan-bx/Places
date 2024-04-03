@@ -8,6 +8,7 @@ import {
     avgPrice,
     barTypes,
     isFree,
+    lieuTypes,
 } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
@@ -27,11 +28,16 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
+    lieuTypes: lieuTypes[1],
     name: '',
     address: '',
     postalCode: '',
     country: '',
     city: '',
+    artType: artType[0],
+    artMovement: artMovement[0],
+    isFree: isFree[0],
+    avgPrice: avgPrice[0],
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -42,6 +48,7 @@ const validationSchema = yup.object({
     country: countryValidator,
     artType: artTypeValidator,
     artMovement: artMovementValidator,
+    isFree: isFreeValidator,
 })
 const CreateBarPage = () => {
     const handleSubmit = async (values, { resetForm }) => {

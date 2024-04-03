@@ -2,7 +2,7 @@ import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { FormField } from '@/components/FormField'
 import Header from '@/components/Header'
-import { avgPrice, barTypes } from '@/utils/constants'
+import { avgPrice, barTypes, lieuTypes } from '@/utils/constants'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import {
     lieuTypesValidator,
@@ -13,21 +13,20 @@ import {
     countryValidator,
     barTypesValidator,
     avgPriceValidator,
-    starsValidator,
 } from '@/validators'
 import axios from 'axios'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
-    lieuTypes: 'Bar',
+    lieuTypes: lieuTypes[2],
     name: '',
     address: '',
     postalCode: '',
     country: '',
     city: '',
-    barTypes: '',
-    avgPrice: '',
+    barTypes: barTypes[0],
+    avgPrice: avgPrice[0],
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,

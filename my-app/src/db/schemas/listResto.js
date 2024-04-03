@@ -2,6 +2,10 @@ import { avgPrice, cuisineTypes, lieuTypes, stars } from '@/utils/constants'
 import { Schema } from 'mongoose'
 
 export const listResto = new Schema({
+    lieuTypes: {
+        type: String,
+        enum: lieuTypes,
+    },
     name: {
         type: String,
     },
@@ -11,13 +15,13 @@ export const listResto = new Schema({
     city: {
         type: String,
     },
-    postal: {
+    postalCode: {
         type: Number,
     },
     country: {
         type: String,
     },
-    cuisineType: {
+    cuisineTypes: {
         type: String,
         enum: cuisineTypes,
     },
@@ -25,7 +29,7 @@ export const listResto = new Schema({
         type: String,
         enum: stars,
     },
-    averagePrice: {
+    avgPrice: {
         type: String,
         enum: avgPrice,
     },

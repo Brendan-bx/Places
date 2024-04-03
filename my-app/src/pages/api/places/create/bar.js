@@ -12,7 +12,7 @@ const handle = mw(async (req, res) => {
   }*/
     if (req.method === 'POST') {
         const {
-            placeTypes,
+            lieuTypes,
             name,
             address,
             city,
