@@ -22,11 +22,11 @@ export const listResto = new Schema({
         enum: cuisineTypes,
     },
     stars: {
-        type: Number,
+        type: String,
         enum: stars,
     },
     averagePrice: {
-        type: Number,
+        type: String,
         enum: avgPrice,
     },
 })

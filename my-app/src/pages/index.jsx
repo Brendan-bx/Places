@@ -2,6 +2,8 @@ import Header from '@/components/Header'
 import { Button } from '@/components/Button'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import { lieuTypes } from '@/utils/constants'
+import axios from 'axios'
+import { useState } from 'react'
 
 const products = [
     {
@@ -58,27 +60,51 @@ const products = [
     // More products...
 ]
 
-export default function Home() {
+/*export const getServerSideProps = async () => {
+    try {
+        const response = await axios(
+            'http://localhost:3000/api/places/create/resto'
+        )
+        console.log('Response:', response)
+
+        const resto = response.data // Assuming the data returned is the object you expect
+        console.log('Resto:', resto)
+
+        return {
+            props: { initialResto: Object.values(resto) },
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error)
+        return {
+            props: { initialResto: null },
+        }
+    }
+}*/
+
+export default function Home({}) {
+    const [resto, setResto] = useState([])
+
     return (
         <>
             <Header />
             <div className="flex flex-wrap">
                 <section className="w-[183vh] h-20 mx-36 ">
                     <div className=" max-w-2xl mx-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                        <h2>Products</h2>
+                        <h2>Places</h2>
 
                         <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 grid-cols-3 xl:gap-x-8">
-                            {products.map((product) => (
+                            {resto.map((name, city, postalCode) => (
                                 <a
-                                    key={product.id}
-                                    href={product.href}
+                                    key={name}
+                                    href={name}
                                     className="group border-solid border-2 border-sky-500"
                                 >
                                     <h3 className="mt-4 text-sm text-gray-700">
-                                        {product.name}
+                                        {city}
+                                        {postalCode}
                                     </h3>
                                     <p className="mt-1 text-lg font-medium text-gray-900">
-                                        {product.price}
+                                        {country}
                                     </p>
                                     <div className="flex justify-around">
                                         <Button

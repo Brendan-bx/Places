@@ -20,12 +20,14 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
+    lieuTypes: 'Bar',
     name: '',
     address: '',
     postalCode: '',
     country: '',
     city: '',
     barTypes: '',
+    avgPrice: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -36,7 +38,6 @@ const validationSchema = yup.object({
     country: countryValidator,
     barTypes: barTypesValidator,
     avgPrice: avgPriceValidator,
-    stars: starsValidator,
 })
 const CreateBarPage = () => {
     const handleSubmit = async (values, { resetForm }) => {

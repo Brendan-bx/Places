@@ -40,7 +40,7 @@ export const listParcs = new Schema({
         enum: isFree,
     },
     averagePrice: {
-        type: Number,
+        type: String,
         enum: avgPrice,
     },
 })

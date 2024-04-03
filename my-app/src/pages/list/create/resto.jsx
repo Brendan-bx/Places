@@ -25,7 +25,6 @@ const initialValues = {
     postalCode: '',
     country: '',
     city: '',
-    cuisineType: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -40,6 +39,7 @@ const validationSchema = yup.object({
 })
 const CreateRestoPage = () => {
     const handleSubmit = async (values, { resetForm }) => {
+        console.log(values)
         await axios.post(
             'http://localhost:3000/api/places/create/resto',
             values
@@ -94,6 +94,7 @@ const CreateRestoPage = () => {
                         name="cuisineTypes"
                         placeholder=""
                         label="Cuisine type"
+                        initialValues={cuisineTypes[0]}
                     >
                         {cuisineTypes.map((cuisineType) => (
                             <option value={cuisineType} key={cuisineType}>

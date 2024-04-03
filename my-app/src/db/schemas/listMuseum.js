@@ -11,8 +11,8 @@ export const listMuseum = new Schema({
     city: {
         type: String,
     },
-    postal: {
-        type: Number,
+    postalCode: {
+        type: String,
     },
     country: {
         type: String,
@@ -30,7 +30,7 @@ export const listMuseum = new Schema({
         enum: isFree,
     },
     averagePrice: {
-        type: Number,
+        type: String,
         enum: avgPrice,
     },
 })

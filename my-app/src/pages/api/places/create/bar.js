@@ -12,14 +12,13 @@ const handle = mw(async (req, res) => {
   }*/
     if (req.method === 'POST') {
         const {
+            placeTypes,
             name,
             address,
             city,
             postalCode,
             country,
             barType,
-            isPrivate,
-            isFree,
             avgPrice,
         } = req.body
 

@@ -1,4 +1,4 @@
-import { avgPrice, lieuTypes, barTypes, stars } from '@/utils/constants'
+import { avgPrice, lieuTypes, barTypes } from '@/utils/constants'
 import { Schema } from 'mongoose'
 
 export const listBar = new Schema({
@@ -12,14 +12,14 @@ export const listBar = new Schema({
         type: String,
     },
     postal: {
-        type: Number,
+        type: String,
     },
     country: {
         type: String,
     },
-    barType: {
+    placeTypes: {
         type: String,
-        enum: lieuTypes,
+        enum: lieuTypes[2],
     },
     barTypes: {
         type: String,
