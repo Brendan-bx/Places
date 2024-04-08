@@ -7,3 +7,4 @@ export const createPlace = async (data) => {
 
     return newPlace
 }
+export const readPlaces = async () => await PlacesModel.find()

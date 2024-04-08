@@ -1,5 +1,5 @@
 export const cuisineTypes = ['korean', 'french', 'gastronomique']
-export const lieuTypes = ['Restaurants', 'Museum', 'Bars', 'Parcs']
+export const lieuTypes = ['resto', 'museum', 'bar', 'parc']
 export const avgPrice = ['1', '2', '3', '4', '5']
 export const stars = ['1', '2', '3']
 export const artMovement = ['realism', 'cubism', 'street-art']

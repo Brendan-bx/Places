@@ -3,9 +3,9 @@ import { createPlace, readPlaces } from '@/db/crudResto'
 
 const handle = mw(async (req, res) => {
     if (req.method === 'GET') {
-        const resto = await readPlaces()
+        const places = await readPlaces()
 
-        res.send(resto)
+        res.send(places)
 
         return
     }
