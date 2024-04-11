@@ -37,7 +37,6 @@ const initialValues = {
     parcTypes: parcTypes[0],
     isPrivate: isPrivate[0],
     isFree: isFree[0],
-    avgPrice: '',
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,

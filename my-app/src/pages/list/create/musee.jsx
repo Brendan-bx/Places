@@ -6,7 +6,6 @@ import {
     artMovement,
     artType,
     avgPrice,
-    barTypes,
     isFree,
     lieuTypes,
 } from '@/utils/constants'
@@ -38,7 +37,6 @@ const initialValues = {
     artType: artType[0],
     artMovement: artMovement[0],
     isFree: isFree[0],
-    avgPrice: avgPrice[0],
 }
 const validationSchema = yup.object({
     lieuTypes: lieuTypesValidator,
@@ -50,8 +48,9 @@ const validationSchema = yup.object({
     artType: artTypeValidator,
     artMovement: artMovementValidator,
     isFree: isFreeValidator,
+    avgPrice: avgPriceValidator,
 })
-const CreateBarPage = () => {
+const CreateMuseumPage = () => {
     const [isFreeValue, setIsFreeValue] = useState(initialValues.isFree)
 
     const handleIsFreeChange = (e, formikProps) => {
@@ -171,4 +170,4 @@ const CreateBarPage = () => {
     )
 }
 
-export default CreateBarPage
+export default CreateMuseumPage

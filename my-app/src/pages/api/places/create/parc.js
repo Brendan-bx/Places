@@ -1,7 +1,7 @@
 import { mw } from '@/api/mw'
 import { createPlace, readPlaces } from '@/db/crudParc'
 
-const handle = mw(async (req, res) => {
+const handleParc = mw(async (req, res) => {
     if (req.method === 'GET') {
         const places = await readPlaces()
 
@@ -20,4 +20,4 @@ const handle = mw(async (req, res) => {
     res.status(405).send({ error: 'Method not allowed' })
 })
 
-export default handle
+export default handleParc

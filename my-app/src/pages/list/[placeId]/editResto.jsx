@@ -19,7 +19,7 @@ import * as yup from 'yup'
 
 export const getServerSideProps = async ({ query: { placeId } }) => {
     const { data: places } = await axios(
-        `http://localhost:3000/api/places/create/resto/${placeId}`
+        `http://localhost:3000/api/places/create/${placeId}`
     )
 
     return { props: { places } }

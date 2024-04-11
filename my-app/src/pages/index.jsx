@@ -1,31 +1,36 @@
 import React, { useState } from 'react'
 import Header from '@/components/Header'
 import { Button } from '@/components/Button'
-import { capitalizeFirstLetter } from '@/utils/functions'
 import { lieuTypes } from '@/utils/constants'
 import axios from 'axios'
 
-export const getServerSideProps = async () => {
-    const { data: places } = await axios(
-        `http://localhost:3000/api/places/create/resto`
-    )
-
-    return {
-        props: { initialPlaces: places },
-    }
-}
-
-export default function Home({ initialPlaces }) {
-    const [places, setPlaces] = useState(initialPlaces)
+export default function Home() {
+    const [places, setPlaces] = useState([])
     const [selectedLieuType, setSelectedLieuType] = useState('')
 
-    const filteredResto = selectedLieuType
-        ? places.filter((item) => item.lieuTypes.includes(selectedLieuType))
-        : places
-
-    const handleLieuTypeChange = (event) => {
-        setSelectedLieuType(event.target.value)
+    const generateApiUrl = (lieuType) => {
+        return `http://localhost:3000/api/places/create/${encodeURIComponent(lieuType)}`
     }
+
+    const handleLieuTypeChange = async (event) => {
+        const selectedValue = event.target.value
+        setSelectedLieuType(selectedValue)
+        const apiUrl = generateApiUrl(selectedValue)
+        console.log(selectedValue)
+        try {
+            const { data } = await axios(apiUrl)
+            setPlaces(data)
+        } catch (error) {
+            console.error('Error fetching data:', error)
+        }
+    }
+
+    const filteredPlaces = selectedLieuType
+        ? places.filter(
+              (item) =>
+                  item.lieuTypes && item.lieuTypes.includes(selectedLieuType)
+          )
+        : places
 
     return (
         <>
@@ -34,32 +39,53 @@ export default function Home({ initialPlaces }) {
                 <section className="w-[183vh] h-20 mx-36 ">
                     <div className=" max-w-2xl mx-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                         <h2>Places</h2>
-
-                        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 grid-cols-3 xl:gap-x-8">
-                            {filteredResto.map(
-                                ({ _id, name, city, postalCode, country }) => (
-                                    <a
-                                        key={_id}
-                                        href={`/infos/${_id}`}
-                                        className="group border-solid border-2 border-sky-500"
-                                    >
-                                        <h3 className="mt-4 text-sm text-gray-700">
-                                            {city}--
-                                            {postalCode}
-                                        </h3>
-                                        <p className="mt-1 text-lg font-medium text-gray-900">
-                                            {country}
+                        <div className="grid gap-y-6 gap-x-2 sm:grid-cols-2 grid-cols-3">
+                            {filteredPlaces.map(
+                                ({
+                                    _id,
+                                    name,
+                                    city,
+                                    postalCode,
+                                    country,
+                                    lieuTypes,
+                                }) => (
+                                    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                        <a href="#" key={_id}>
+                                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                                {lieuTypes}
+                                            </h5>
+                                        </a>
+                                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                            {'Country : ' + country}
                                         </p>
-                                        <div className="flex justify-around">
-                                            <Button
-                                                variant="primary"
-                                                size="md"
-                                                className="hidden group-hover:inline"
+                                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                            {'City : ' +
+                                                city +
+                                                ' ' +
+                                                postalCode}
+                                        </p>
+                                        <a
+                                            href={`/infos/${_id}`}
+                                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        >
+                                            Read more
+                                            <svg
+                                                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 14 10"
                                             >
-                                                INFOS
-                                            </Button>
-                                        </div>
-                                    </a>
+                                                <path
+                                                    stroke="currentColor"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 )
                             )}
                         </div>
@@ -69,12 +95,12 @@ export default function Home({ initialPlaces }) {
                     <p>Types of places</p>
                     <select
                         className="border-solid border-2 border-gray-600"
+                        value={selectedLieuType}
                         onChange={handleLieuTypeChange}
                     >
-                        <option value="">All</option>
                         {lieuTypes.map((lieuType) => (
                             <option value={lieuType} key={lieuType}>
-                                {capitalizeFirstLetter(lieuType)}
+                                {lieuType}
                             </option>
                         ))}
                     </select>
