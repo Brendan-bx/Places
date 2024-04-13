@@ -18,7 +18,6 @@ const handle = mw(async (req, res) => {
         return
     }
 
-    // Update (item) => PATCH /todos/:todoId
     if (req.method === 'PATCH') {
         const updatedPlace = await updatePlace(placeId)
 
@@ -33,7 +32,6 @@ const handle = mw(async (req, res) => {
         return
     }
 
-    // Delete (item) => DELETE /todos/:todoId
     if (req.method === 'DELETE') {
         const placeToBeDelete = await deletePlace(placeId)
 

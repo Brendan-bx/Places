@@ -9,8 +9,8 @@ export const createPlace = async (data) => {
 }
 export const readPlaces = async () => await PlacesModel.find()
 export const readPlace = async (placeId) => await PlacesModel.findById(placeId)
-export const updatePlace = async (placeId, input) => {
-    const updatedPlace = await PlacesModel.findByIdAndUpdate(placeId, input, {
+export const updatePlace = async (placeId, data) => {
+    const updatedPlace = await PlacesModel.findByIdAndUpdate(placeId, data, {
         returnDocument: 'after',
     })
 

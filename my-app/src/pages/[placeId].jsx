@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button'
+import LinkButton from '@/components/FormButton'
 import Header from '@/components/Header'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import axios from 'axios'
@@ -31,8 +32,15 @@ const InfosPage = ({ place }) => {
                     <p className="mb-2">{'Number of stars: ' + place.stars}</p>
                     <p className="mb-4">{'Average price: ' + place.avgPrice}</p>
                     <div className="space-x-4">
-                        <Button variant="primary">Modify</Button>
-                        <Button variant="danger">Delete</Button>
+                        <LinkButton
+                            href={`list/${place._id}/editResto`}
+                            variant="primary"
+                        >
+                            Modify
+                        </LinkButton>
+                        <Button href="#" variant="danger">
+                            Delete
+                        </Button>
                     </div>
                 </div>
             </div>
