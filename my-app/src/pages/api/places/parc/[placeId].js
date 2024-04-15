@@ -1,11 +1,11 @@
 import { mw } from '@/api/mw'
-import { deletePlace, readPlace, updatePlace } from '@/db/crudResto'
+import { deleteParc, readParc, updateParc } from '@/db/crudParc'
 
 const handle = mw(async (req, res) => {
     const { placeId } = req.query
 
     if (req.method === 'GET') {
-        const place = await readPlace(placeId)
+        const place = await readParc(placeId)
 
         if (!place) {
             res.status(404).send({ error: 'Not found' })
@@ -19,21 +19,21 @@ const handle = mw(async (req, res) => {
     }
 
     if (req.method === 'PATCH') {
-        const updatedPlace = await updatePlace(placeId)
+        const updatedParc = await updateParc(placeId, req.body)
 
-        if (!updatedPlace) {
+        if (!updatedParc) {
             res.status(404).send({ error: 'Not found' })
 
             return
         }
 
-        res.send(updatedPlace)
+        res.send(updatedParc)
 
         return
     }
 
     if (req.method === 'DELETE') {
-        const placeToBeDelete = await deletePlace(placeId)
+        const placeToBeDelete = await deleteParc(placeId)
 
         if (!placeToBeDelete) {
             res.status(404).send({ error: 'Not found' })

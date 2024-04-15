@@ -7,16 +7,16 @@ export const createPlace = async (data) => {
 
     return newPlace
 }
-export const readPlaces = async () => await PlacesModel.find()
-export const readPlace = async (placeId) => await PlacesModel.findById(placeId)
-export const updatePlace = async (placeId, data) => {
-    const updatedPlace = await PlacesModel.findByIdAndUpdate(placeId, data, {
+export const readRestos = async () => await PlacesModel.find()
+export const readResto = async (placeId) => await PlacesModel.findById(placeId)
+export const updateResto = async (placeId, data) => {
+    const updatedResto = await PlacesModel.findByIdAndUpdate(placeId, data, {
         returnDocument: 'after',
     })
 
-    return updatedPlace
+    return updatedResto
 }
-export const deletePlace = async (placeId) => {
+export const deleteResto = async (placeId) => {
     const place = await PlacesModel.findOneAndDelete({ _id: placeId })
 
     if (!place) {

@@ -23,7 +23,7 @@ import { capitalizeFirstLetter } from '@/utils/functions'
 
 export const getServerSideProps = async ({ query: { placeId } }) => {
     const { data: place } = await axios.get(
-        `http://localhost:3000/api/places/resto/${placeId}`
+        `http://localhost:3000/api/places/${placeId}`
     )
     return { props: { place } }
 }
@@ -40,13 +40,13 @@ const validationSchema = yup.object({
     avgPriceValidator,
 })
 
-const RestoEditPage = ({ place }) => {
+const TodoEditPage = ({ place }) => {
     const router = useRouter()
     const initialValues = place
 
     const handleSubmit = async (values) => {
         await axios.patch(
-            `http://localhost:3000/api/places/resto/${place._id}`,
+            `http://localhost:3000/api/places/${place._id}`,
             values
         )
         router.push('/create')
@@ -138,4 +138,4 @@ const RestoEditPage = ({ place }) => {
     )
 }
 
-export default RestoEditPage
+export default TodoEditPage

@@ -1,16 +1,16 @@
 import { mw } from '@/api/mw'
-import { createPlace, readPlaces } from '@/db/crudParc'
+import { createParc, readParcs } from '@/db/crudParc'
 
 const handleParc = mw(async (req, res) => {
     if (req.method === 'GET') {
-        const places = await readPlaces()
+        const places = await readParcs()
 
         res.send(places)
 
         return
     }
     if (req.method === 'POST') {
-        const newPlace = await createPlace(req.body)
+        const newPlace = await createParc(req.body)
 
         res.send(newPlace)
 
