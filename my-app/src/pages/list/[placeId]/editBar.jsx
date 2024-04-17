@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { FormField } from '@/components/FormField'
-import { avgPrice, cuisineTypes, lieuTypes, stars } from '@/utils/constants'
+import { avgPrice, barTypes, lieuTypes } from '@/utils/constants'
 
 import Header from '@/components/Header'
 import {
@@ -11,8 +11,7 @@ import {
     cityValidator,
     postalCodeValidator,
     countryValidator,
-    cuisineTypesValidator,
-    starsValidator,
+    barTypesValidator,
     avgPriceValidator,
 } from '@/validators'
 import axios from 'axios'
@@ -23,33 +22,32 @@ import { capitalizeFirstLetter } from '@/utils/functions'
 
 export const getServerSideProps = async ({ query: { placeId } }) => {
     const { data: place } = await axios.get(
-        `http://localhost:3000/api/places/${placeId}`
+        `http://localhost:3000/api/places/bar/${placeId}`
     )
     return { props: { place } }
 }
 
 const validationSchema = yup.object({
-    lieuTypesValidator,
-    nameValidator,
-    addressValidator,
-    cityValidator,
-    postalCodeValidator,
-    countryValidator,
-    cuisineTypesValidator,
-    starsValidator,
-    avgPriceValidator,
+    lieuTypes: lieuTypesValidator,
+    name: nameValidator,
+    address: addressValidator,
+    city: cityValidator,
+    postalCode: postalCodeValidator,
+    country: countryValidator,
+    barTypes: barTypesValidator,
+    avgPrice: avgPriceValidator,
 })
 
-const TodoEditPage = ({ place }) => {
+const BarEditPage = ({ place }) => {
     const router = useRouter()
     const initialValues = place
 
     const handleSubmit = async (values) => {
         await axios.patch(
-            `http://localhost:3000/api/places/${place._id}`,
+            `http://localhost:3000/api/places/bar/${place._id}`,
             values
         )
-        router.push('/create')
+        router.push('/')
     }
 
     return (
@@ -61,7 +59,7 @@ const TodoEditPage = ({ place }) => {
                 onSubmit={handleSubmit}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Edit Place</p>
+                    <p className="text-3xl m-4">Add a bar</p>
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"
@@ -72,7 +70,7 @@ const TodoEditPage = ({ place }) => {
                         className="w-80 text-neutral-950"
                         name="address"
                         placeholder="Type the address ..."
-                        label="Address :"
+                        label="Address"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
@@ -83,8 +81,8 @@ const TodoEditPage = ({ place }) => {
                     <FormField
                         className="w-80 text-neutral-950"
                         name="postalCode"
-                        placeholder="Type the postal code ... "
-                        label="Postal code"
+                        placeholder="Type the Postal code ... "
+                        label="Postal Code"
                     />
                     <FormField
                         className="w-80 text-neutral-950"
@@ -95,47 +93,34 @@ const TodoEditPage = ({ place }) => {
                     <FormField
                         className="w-80"
                         as="select"
-                        name="cuisineTypes"
+                        name="barTypes"
                         placeholder=""
-                        label="Cuisine type"
+                        label="Bar type"
                     >
-                        {cuisineTypes.map((cuisineType) => (
-                            <option value={cuisineType} key={cuisineType}>
-                                {capitalizeFirstLetter(cuisineType)}
+                        {barTypes.map((barType) => (
+                            <option value={barType} key={barType}>
+                                {capitalizeFirstLetter(barType)}
                             </option>
                         ))}
                     </FormField>
                     <FormField
                         className="w-80"
                         as="select"
-                        name="stars"
-                        placeholder=""
-                        label="Stars"
-                    >
-                        {stars.map((etoile) => (
-                            <option value={etoile} key={etoile}>
-                                {etoile}
-                            </option>
-                        ))}
-                    </FormField>
-                    <FormField
-                        className="w-80"
-                        as="select"
-                        name="price"
+                        name="avgPrice"
                         placeholder=""
                         label="Average price"
                     >
                         {avgPrice.map((avgPrice) => (
                             <option value={avgPrice} key={avgPrice}>
-                                {avgPrice}
+                                {capitalizeFirstLetter(avgPrice)}
                             </option>
                         ))}
                     </FormField>
-                    <Button type="submit">Update</Button>
+                    <Button type="submit">Create</Button>
                 </Form>
             </Formik>
         </>
     )
 }
 
-export default TodoEditPage
+export default BarEditPage

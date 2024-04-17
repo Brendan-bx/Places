@@ -27,6 +27,7 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import * as yup from 'yup'
 import { capitalizeFirstLetter } from '@/utils/functions'
+import { useState } from 'react'
 
 export const getServerSideProps = async ({ query: { placeId } }) => {
     const { data: place } = await axios.get(
@@ -49,6 +50,7 @@ const validationSchema = yup.object({
 })
 
 const ParcEditPage = ({ place }) => {
+    const initialValues = place
     const [isFreeValue, setIsFreeValue] = useState(initialValues.isFree)
 
     const handleIsFreeChange = (e, formikProps) => {
@@ -57,14 +59,13 @@ const ParcEditPage = ({ place }) => {
         formikProps.setFieldValue('isFree', selectedValue)
     }
     const router = useRouter()
-    const initialValues = place
 
     const handleSubmit = async (values) => {
         await axios.patch(
             `http://localhost:3000/api/places/parc/${place._id}`,
             values
         )
-        router.push('/create')
+        router.push('/')
     }
 
     return (
@@ -77,7 +78,7 @@ const ParcEditPage = ({ place }) => {
             >
                 {(formikProps) => (
                     <Form className="flex justify-center">
-                        <p className="text-3xl m-4">Add a parc</p>
+                        <p className="text-3xl m-4">Edit parc</p>
                         <FormField
                             className="w-80 text-neutral-950"
                             name="name"

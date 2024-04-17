@@ -5,32 +5,16 @@ import { capitalizeFirstLetter } from '@/utils/functions'
 import axios from 'axios'
 import React, { useState } from 'react'
 
-export const getServerSideProps = async ({ query: { placeId } }) => {
-    let placeType = 'resto'
-    let apiUrl = `http://localhost:3000/api/places/resto/${placeId}`
-
+export const getServerSideProps = async ({ query: { placeType, placeId } }) => {
     try {
-        const { data } = await axios.get(apiUrl)
-
-        if (data.lieuTypes === 'resto') {
-            placeType = 'resto'
-            apiUrl = `http://localhost:3000/api/places/resto/${placeId}`
-        } else if (data.lieuTypes === 'bar') {
-            placeType = 'bar'
-            apiUrl = `http://localhost:3000/api/places/bar/${placeId}`
-        } else if (data.lieuTypes === 'parc') {
-            placeType = 'parc'
-            apiUrl = `http://localhost:3000/api/places/parc/${placeId}`
-        } else if (data.lieuTypes === 'museum') {
-            placeType = 'museum'
-            apiUrl = `http://localhost:3000/api/places/museum/${placeId}`
-        }
+        const { data } = await axios.get(
+            `http://localhost:3000/api/places/${placeType}/${placeId}`
+        )
 
         return {
             props: {
                 place: data,
                 placeType: placeType,
-                apiUrl: apiUrl,
             },
         }
     } catch (error) {
@@ -57,7 +41,8 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
             setTodos([...newPlaces, deletedPlace])
         }
     }
-    const renderRestoInfo = () => {
+
+    const RenderRestoInfo = ({ place }) => {
         if (place.lieuTypes === 'resto') {
             return (
                 <div className="flex mt-20 justify-center items-center h-full">
@@ -65,10 +50,15 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                         <h1 className="text-3xl font-bold mb-4">
                             {place.lieuTypes}
                         </h1>
+                        <h1 className="text-3xl font-bold mb-4">
+                            {place.name}
+                        </h1>
                         <h3 className="text-lg mb-2">
                             {'City: ' + place.city + '  '}
                             {place.postalCode}
                         </h3>
+                        <p className="mb-2">{'Address: ' + place.address}</p>
+
                         <p className="mb-2">{'Country: ' + place.country}</p>
                         <p className="mb-2">
                             {'Type: ' +
@@ -104,10 +94,15 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                         <h1 className="text-3xl font-bold mb-4">
                             {place.lieuTypes}
                         </h1>
+                        <h1 className="text-3xl font-bold mb-4">
+                            {place.name}
+                        </h1>
                         <h3 className="text-lg mb-2">
                             {'City: ' + place.city + '  '}
                             {place.postalCode}
                         </h3>
+                        <p className="mb-2">{'Address: ' + place.address}</p>
+
                         <p className="mb-2">{'Country: ' + place.country}</p>
                         <p className="mb-2">
                             {'Type: ' + capitalizeFirstLetter(place.barTypes)}
@@ -136,10 +131,14 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                         <h1 className="text-3xl font-bold mb-4">
                             {place.lieuTypes}
                         </h1>
+                        <h1 className="text-3xl font-bold mb-4">
+                            {place.name}
+                        </h1>
                         <h3 className="text-lg mb-2">
                             {'City: ' + place.city + '  '}
                             {place.postalCode}
-                        </h3>
+                        </h3>{' '}
+                        <p className="mb-2">{'Address: ' + place.address}</p>
                         <p className="mb-2">{'Country: ' + place.country}</p>
                         <p className="mb-2">
                             {'Type: ' + capitalizeFirstLetter(place.parcTypes)}
@@ -176,10 +175,15 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                         <h1 className="text-3xl font-bold mb-4">
                             {place.lieuTypes}
                         </h1>
+                        <h1 className="text-3xl font-bold mb-4">
+                            {place.name}
+                        </h1>
                         <h3 className="text-lg mb-2">
                             {'City: ' + place.city + '  '}
                             {place.postalCode}
                         </h3>
+                        <p className="mb-2">{'Address: ' + place.address}</p>
+
                         <p className="mb-2">{'Country: ' + place.country}</p>
                         <p className="mb-2">
                             {'Type of movement: ' +
@@ -223,7 +227,7 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
     return (
         <div>
             <Header />
-            {renderRestoInfo()}
+            <RenderRestoInfo place={place} />
         </div>
     )
 }

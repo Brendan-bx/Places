@@ -16,7 +16,7 @@ import {
     avgPriceValidator,
 } from '@/validators'
 import axios from 'axios'
-import { Formik } from 'formik'
+import { ErrorMessage, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import * as yup from 'yup'
 import { capitalizeFirstLetter } from '@/utils/functions'
@@ -29,15 +29,15 @@ export const getServerSideProps = async ({ query: { placeId } }) => {
 }
 
 const validationSchema = yup.object({
-    lieuTypesValidator,
-    nameValidator,
-    addressValidator,
-    cityValidator,
-    postalCodeValidator,
-    countryValidator,
-    cuisineTypesValidator,
-    starsValidator,
-    avgPriceValidator,
+    lieuTypes: lieuTypesValidator,
+    name: nameValidator,
+    address: addressValidator,
+    city: cityValidator,
+    postalCode: postalCodeValidator,
+    country: countryValidator,
+    cuisineTypes: cuisineTypesValidator,
+    stars: starsValidator,
+    avgPrice: avgPriceValidator,
 })
 
 const RestoEditPage = ({ place }) => {
@@ -49,7 +49,7 @@ const RestoEditPage = ({ place }) => {
             `http://localhost:3000/api/places/resto/${place._id}`,
             values
         )
-        router.push('/create')
+        router.push('/')
     }
 
     return (
@@ -61,37 +61,42 @@ const RestoEditPage = ({ place }) => {
                 onSubmit={handleSubmit}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Edit Place</p>
+                    <p className="text-3xl m-4">Edit resto</p>
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"
                         placeholder="Type the place name ..."
                         label="Place name"
                     />
+                    <ErrorMessage name="name" />
                     <FormField
                         className="w-80 text-neutral-950"
                         name="address"
                         placeholder="Type the address ..."
                         label="Address :"
                     />
+                    <ErrorMessage name="address" />
                     <FormField
                         className="w-80 text-neutral-950"
                         name="city"
                         placeholder="Type the city ..."
                         label="City"
                     />
+                    <ErrorMessage name="city" />
                     <FormField
                         className="w-80 text-neutral-950"
                         name="postalCode"
                         placeholder="Type the postal code ... "
                         label="Postal code"
                     />
+                    <ErrorMessage name="postalCode" />
                     <FormField
                         className="w-80 text-neutral-950"
                         name="country"
                         placeholder="Type the country ..."
                         label="Country"
                     />
+                    <ErrorMessage name="country" />
                     <FormField
                         className="w-80"
                         as="select"
@@ -105,6 +110,7 @@ const RestoEditPage = ({ place }) => {
                             </option>
                         ))}
                     </FormField>
+                    <ErrorMessage name="cuisineTypes" />
                     <FormField
                         className="w-80"
                         as="select"
@@ -118,6 +124,7 @@ const RestoEditPage = ({ place }) => {
                             </option>
                         ))}
                     </FormField>
+                    <ErrorMessage name="stars" />
                     <FormField
                         className="w-80"
                         as="select"
@@ -131,6 +138,7 @@ const RestoEditPage = ({ place }) => {
                             </option>
                         ))}
                     </FormField>
+                    <ErrorMessage name="price" />
                     <Button type="submit">Update</Button>
                 </Form>
             </Formik>

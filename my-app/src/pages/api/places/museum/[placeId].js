@@ -21,7 +21,7 @@ const handle = mw(async (req, res) => {
     if (req.method === 'PATCH') {
         const updatedMuseum = await updateMuseum(placeId, req.body)
 
-        if (!updatedBar) {
+        if (!updatedMuseum) {
             res.status(404).send({ error: 'Not found' })
 
             return
