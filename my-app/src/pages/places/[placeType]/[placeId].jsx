@@ -25,7 +25,7 @@ export const getServerSideProps = async ({ query: { placeType, placeId } }) => {
     }
 }
 
-const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
+const InfosPage = ({ place, initialPlaces, placeType }) => {
     const [places, setPlaces] = useState(initialPlaces || [])
 
     const handleDelete = (placeId) => async () => {
@@ -53,29 +53,41 @@ const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
             return (
                 <div className="flex mt-20 justify-center items-center h-full">
                     <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-md w-full">
-                        <h1 className="text-3xl font-bold mb-4">
-                            {place.lieuTypes}
-                        </h1>
+                        <img
+                            src="/restaurant.png"
+                            alt="restaurant icon"
+                            className="w-12 h-12"
+                        />
                         <h1 className="text-3xl font-bold mb-4">
                             {place.name}
                         </h1>
-                        <h3 className="text-lg mb-2">
-                            {'City: ' + place.city + '  '}
+                        <p className="flex mb-2">
+                            <img src="/location.png" className="w-6 h-6 mr-2" />
+                            {place.city + '  '}
                             {place.postalCode}
-                        </h3>
-                        <p className="mb-2">{'Address: ' + place.address}</p>
+                        </p>
+                        <p className="mb-2 ml-8">
+                            {place.address + ', ' + place.country}
+                        </p>
+                        <p className="flex mb-2">
+                            <img
+                                src="/serving-dish.png"
+                                className="w-6 h-6 mr-2"
+                            />
+                            {capitalizeFirstLetter(place.cuisineTypes)}
+                        </p>
+                        <p className="mb-2 flex">
+                            <img src="/star.png" className="w-6 h-6 mr-2" />
+                            {place.stars}
+                            <span className="flex items-center ml-4">
+                                <img
+                                    src="/dollar.png"
+                                    className="w-6 h-6 mr-2"
+                                />
+                                {place.avgPrice}
+                            </span>
+                        </p>
 
-                        <p className="mb-2">{'Country: ' + place.country}</p>
-                        <p className="mb-2">
-                            {'Type: ' +
-                                capitalizeFirstLetter(place.cuisineTypes)}
-                        </p>
-                        <p className="mb-2">
-                            {'Number of stars: ' + place.stars}
-                        </p>
-                        <p className="mb-4">
-                            {'Average price: ' + place.avgPrice}
-                        </p>
                         <div className="space-x-4">
                             <LinkButton
                                 href={`/list/${place._id}/editResto`}
@@ -97,24 +109,30 @@ const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
             return (
                 <div className="flex mt-20 justify-center items-center h-full">
                     <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-md w-full">
-                        <h1 className="text-3xl font-bold mb-4">
-                            {place.lieuTypes}
-                        </h1>
+                        <img
+                            src="/bar-counter.png"
+                            alt="bar icon"
+                            className="w-12 h-12"
+                        />
                         <h1 className="text-3xl font-bold mb-4">
                             {place.name}
                         </h1>
-                        <h3 className="text-lg mb-2">
-                            {'City: ' + place.city + '  '}
+                        <p className="flex mb-2">
+                            <img src="/location.png" className="h-6 w-6 mr-2" />
+                            {place.city + '  '}
                             {place.postalCode}
-                        </h3>
-                        <p className="mb-2">{'Address: ' + place.address}</p>
-
-                        <p className="mb-2">{'Country: ' + place.country}</p>
-                        <p className="mb-2">
-                            {'Type: ' + capitalizeFirstLetter(place.barTypes)}
                         </p>
-                        <p className="mb-4">
-                            {'Average price: ' + place.avgPrice}
+                        <p className="mb-2 ml-8">
+                            {place.address + ', ' + place.country}
+                        </p>
+
+                        <p className="flex mb-2">
+                            <img src="/cocktail.png" className="h-6 w-6 mr-2" />
+                            {capitalizeFirstLetter(place.barTypes)}
+                        </p>
+                        <p className="mb-4 flex">
+                            <img src="/dollar.png" className="w-6 h-6 mr-2" />
+                            {place.avgPrice}
                         </p>
                         <div className="space-x-4">
                             <LinkButton
@@ -137,28 +155,37 @@ const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
             return (
                 <div className="flex mt-20 justify-center items-center h-full">
                     <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-md w-full">
-                        <h1 className="text-3xl font-bold mb-4">
-                            {place.lieuTypes}
-                        </h1>
+                        <img src="/park.png" className="h-12 w-12 " />
                         <h1 className="text-3xl font-bold mb-4">
                             {place.name}
                         </h1>
-                        <h3 className="text-lg mb-2">
-                            {'City: ' + place.city + '  '}
+                        <p className="flex mb-2">
+                            <img src="/location.png" className="w-6 h-6 mr-2" />
+                            {place.city + '  '}
                             {place.postalCode}
-                        </h3>{' '}
-                        <p className="mb-2">{'Address: ' + place.address}</p>
-                        <p className="mb-2">{'Country: ' + place.country}</p>
-                        <p className="mb-2">
-                            {'Type: ' + capitalizeFirstLetter(place.parcTypes)}
                         </p>
-                        <p className="mb-4">
-                            {'Public or private: ' + place.isPrivate}
+                        <p className="mb-2 ml-8">
+                            {place.address + ', ' + place.country}
                         </p>
-                        <p className="mb-4">{'Free or fee: ' + place.isFree}</p>
+                        <p className="flex mb-2">
+                            <img src="/park2.png" className="h-6 w-6 mr-2" />
+                            {capitalizeFirstLetter(place.parcTypes)}
+                        </p>
+                        <p className="flex mb-4">
+                            <img src="/lock.png" className="h-6 w-6 mr-2" />
+                            {capitalizeFirstLetter(place.isPrivate)}
+                        </p>
+                        <p className="flex mb-4">
+                            <img src="/hand.png" className="h-6 w-6 mr-2" />
+                            {capitalizeFirstLetter(place.isFree)}
+                        </p>
                         {place.isFree === 'fee' && (
                             <>
-                                <p className="mb-4">
+                                <p className="flex mb-4">
+                                    <img
+                                        src="/dollar.png"
+                                        className="w-6 h-6 mr-2"
+                                    />
                                     {'Average price: ' + place.avgPrice}
                                 </p>
                             </>
@@ -184,34 +211,47 @@ const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
             return (
                 <div className="flex mt-20 justify-center items-center h-full">
                     <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-md w-full">
-                        <h1 className="text-3xl font-bold mb-4">
-                            {place.lieuTypes}
-                        </h1>
+                        <img src="/museum.png" className="w-12 h-12" />
                         <h1 className="text-3xl font-bold mb-4">
                             {place.name}
                         </h1>
-                        <h3 className="text-lg mb-2">
-                            {'City: ' + place.city + '  '}
+                        <p className="flex mb-2">
+                            <img src="/location.png" className="h-6 w-6 mr-2" />
+                            {place.city + '  '}
                             {place.postalCode}
-                        </h3>
-                        <p className="mb-2">{'Address: ' + place.address}</p>
+                        </p>
+                        <p className="mb-2 ml-8">
+                            {place.address + ', ' + place.country}
+                        </p>
 
-                        <p className="mb-2">{'Country: ' + place.country}</p>
-                        <p className="mb-2">
+                        <p className="flex mb-2">
+                            <img
+                                src="/performing.png"
+                                className="h-6 w-6 mr-2"
+                            />
                             {'Type of movement: ' +
                                 capitalizeFirstLetter(place.artMovement)}
                         </p>
-                        <p className="mb-2">
+                        <p className="flex mb-2">
+                            <img
+                                src="/mona-lisa.png"
+                                className="h-6 w-6 mr-2"
+                            />
                             {'Type of art: ' +
                                 capitalizeFirstLetter(place.artType)}
                         </p>
-                        <p className="mb-4">
+                        <p className="flex mb-4">
+                            <img src="/hand.png" className="h-6 w-6 mr-2" />
                             {'Free or Fee: ' +
                                 capitalizeFirstLetter(place.isFree)}
                         </p>
                         {place.isFree === 'fee' && (
                             <>
-                                <p className="mb-4">
+                                <p className="mb-4 flex">
+                                    <img
+                                        src="/dollar.png"
+                                        className="h-6 w-6 mr-2"
+                                    />
                                     {'Average price: ' + place.avgPrice}
                                 </p>
                             </>
@@ -243,4 +283,4 @@ const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
     )
 }
 
-export default InfosRestoPage
+export default InfosPage

@@ -126,7 +126,7 @@ const CreateParcPage = () => {
                         >
                             {isPrivate.map((isPrivate) => (
                                 <option value={isPrivate} key={isPrivate}>
-                                    {isPrivate}
+                                    {capitalizeFirstLetter(isPrivate)}
                                 </option>
                             ))}
                         </FormField>
