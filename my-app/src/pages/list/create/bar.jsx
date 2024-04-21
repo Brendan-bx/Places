@@ -47,8 +47,6 @@ const CreateBarPage = () => {
 
     return (
         <>
-            <Header />
-
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}

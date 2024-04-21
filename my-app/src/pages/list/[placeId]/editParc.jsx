@@ -70,7 +70,6 @@ const ParcEditPage = ({ place }) => {
 
     return (
         <>
-            <Header />
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -78,7 +77,7 @@ const ParcEditPage = ({ place }) => {
             >
                 {(formikProps) => (
                     <Form className="flex justify-center">
-                        <p className="text-3xl m-4">Edit parc</p>
+                        <p className="text-3xl m-4">Edit park</p>
                         <FormField
                             className="w-80 text-neutral-950"
                             name="name"

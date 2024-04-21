@@ -67,7 +67,6 @@ const CreateParcPage = () => {
 
     return (
         <>
-            <Header />
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -75,7 +74,7 @@ const CreateParcPage = () => {
             >
                 {(formikProps) => (
                     <Form className="flex justify-center">
-                        <p className="text-3xl m-4">Add a parc</p>
+                        <p className="text-3xl m-4">Add a park</p>
                         <FormField
                             className="w-80 text-neutral-950"
                             name="name"

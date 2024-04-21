@@ -5,7 +5,6 @@ import React from 'react'
 const Create = () => {
     return (
         <div>
-            <Header />
             <h1 className="flex justify-center p-4 text-3xl">Add a Place</h1>
             <div className="flex justify-center gap-4">
                 <LinkButton href="/list/create/resto">

@@ -1,22 +1,11 @@
 import clsx from 'clsx'
 
 const variants = {
-    success: 'bg-green-500 active:bg-green-700 text-white',
-    primary: 'bg-indigo-600 active:bg-indigo-700 text-white',
-    danger: 'bg-red-500 active:bg-red-600 text-white',
+    primary:
+        'px-4 py-2 text-lg font-medium text-white bg-indigo-500 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50',
+    danger: 'px-4 py-2 text-lg font-medium text-white bg-red-500 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50',
 }
-const sizes = {
-    md: 'text-sm px-2 py-1',
-    lg: 'text-lg font-semibold px-4 py-3',
-}
-export const Button = ({
-    className,
-    variant = 'primary',
-    size = 'lg',
-    ...otherProps
-}) => (
-    <button
-        className={clsx(variants[variant], sizes[size], className)}
-        {...otherProps}
-    />
+
+export const Button = ({ className, variant = 'primary', ...otherProps }) => (
+    <button className={clsx(variants[variant], className)} {...otherProps} />
 )

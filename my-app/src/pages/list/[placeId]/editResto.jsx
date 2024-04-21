@@ -54,14 +54,13 @@ const RestoEditPage = ({ place }) => {
 
     return (
         <>
-            <Header />
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
                 <Form className="flex justify-center">
-                    <p className="text-3xl m-4">Edit resto</p>
+                    <p className="text-3xl m-4">Edit restaurant</p>
                     <FormField
                         className="w-80 text-neutral-950"
                         name="name"

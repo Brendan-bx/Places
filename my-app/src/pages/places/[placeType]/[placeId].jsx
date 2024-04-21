@@ -25,20 +25,26 @@ export const getServerSideProps = async ({ query: { placeType, placeId } }) => {
     }
 }
 
-const InfosRestoPage = ({ place, initialPlaces }) => {
-    const [places, setPlaces] = useState(initialPlaces)
+const InfosRestoPage = ({ place, initialPlaces, placeType }) => {
+    const [places, setPlaces] = useState(initialPlaces || [])
 
     const handleDelete = (placeId) => async () => {
-        const deletedPlace = places.find(({ _id }) => _id === placeId)
-        const newPlaces = places.filter(({ _id }) => _id !== placeId)
+        if (!places) {
+            return
+        }
+        const deletedPlace = places.find((place) => place._id === placeId)
+        const newPlaces = places.filter((place) => place._id !== placeId)
         setPlaces(newPlaces)
 
         try {
             await axios.delete(
                 `http://localhost:3000/api/places/${placeType}/${placeId}`
             )
+            router.push('/')
+            alert('Delete successfull', place.name)
         } catch (err) {
-            setTodos([...newPlaces, deletedPlace])
+            console.log(place._id)
+            alert('Error deleting place:', err)
         }
     }
 
@@ -117,7 +123,10 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                             >
                                 Modify
                             </LinkButton>
-                            <Button href="#" variant="danger">
+                            <Button
+                                onClick={handleDelete(place._id)}
+                                variant="danger"
+                            >
                                 Delete
                             </Button>
                         </div>
@@ -147,7 +156,7 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                             {'Public or private: ' + place.isPrivate}
                         </p>
                         <p className="mb-4">{'Free or fee: ' + place.isFree}</p>
-                        {place.isFree === 'Fee' && (
+                        {place.isFree === 'fee' && (
                             <>
                                 <p className="mb-4">
                                     {'Average price: ' + place.avgPrice}
@@ -161,7 +170,10 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                             >
                                 Modify
                             </LinkButton>
-                            <Button href="#" variant="danger">
+                            <Button
+                                onClick={handleDelete(place._id)}
+                                variant="danger"
+                            >
                                 Delete
                             </Button>
                         </div>
@@ -197,7 +209,7 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
                             {'Free or Fee: ' +
                                 capitalizeFirstLetter(place.isFree)}
                         </p>
-                        {place.isFree === 'Fee' && (
+                        {place.isFree === 'fee' && (
                             <>
                                 <p className="mb-4">
                                     {'Average price: ' + place.avgPrice}
@@ -226,7 +238,6 @@ const InfosRestoPage = ({ place, initialPlaces }) => {
 
     return (
         <div>
-            <Header />
             <RenderRestoInfo place={place} />
         </div>
     )

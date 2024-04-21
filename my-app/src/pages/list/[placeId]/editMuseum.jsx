@@ -69,7 +69,6 @@ const MuseumEditPage = ({ place }) => {
 
     return (
         <>
-            <Header />
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}

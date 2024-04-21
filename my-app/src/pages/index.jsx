@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import Header from '@/components/Header'
-import { Button } from '@/components/Button'
 import { lieuTypes } from '@/utils/constants'
 import axios from 'axios'
 import { capitalizeFirstLetter } from '@/utils/functions'
+import { Button } from '@/components/Button'
 
 export default function Home() {
     const [places, setPlaces] = useState([])
@@ -17,7 +16,6 @@ export default function Home() {
         const selectedValue = event.target.value
         setSelectedLieuType(selectedValue)
         const apiUrl = generateApiUrl(selectedValue)
-        console.log(selectedValue)
         try {
             const { data } = await axios(apiUrl)
             setPlaces(data)
@@ -35,7 +33,6 @@ export default function Home() {
 
     return (
         <>
-            <Header />
             <div className="flex">
                 <aside className="p-4 w-1/4">
                     <p className="mb-2">Types of places</p>
@@ -44,6 +41,7 @@ export default function Home() {
                         value={selectedLieuType}
                         onChange={handleLieuTypeChange}
                     >
+                        <option>--</option>
                         {lieuTypes.map((lieuType) => (
                             <option value={lieuType} key={lieuType}>
                                 {lieuType}
@@ -75,6 +73,9 @@ export default function Home() {
                                                 )}
                                             </h5>
                                         </a>
+                                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                            {'Name: ' + name}
+                                        </p>
                                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                                             {'Country: ' + country}
                                         </p>

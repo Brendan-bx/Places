@@ -54,7 +54,6 @@ const CreateRestoPage = () => {
 
     return (
         <>
-            <Header />
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
