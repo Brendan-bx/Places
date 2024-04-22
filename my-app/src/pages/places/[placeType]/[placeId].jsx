@@ -3,6 +3,7 @@ import LinkButton from '@/components/FormButton'
 import Header from '@/components/Header'
 import { capitalizeFirstLetter } from '@/utils/functions'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 export const getServerSideProps = async ({ query: { placeType, placeId } }) => {
@@ -27,6 +28,7 @@ export const getServerSideProps = async ({ query: { placeType, placeId } }) => {
 
 const InfosPage = ({ place, initialPlaces, placeType }) => {
     const [places, setPlaces] = useState(initialPlaces || [])
+    const router = useRouter()
 
     const handleDelete = (placeId) => async () => {
         if (!places) {
@@ -44,7 +46,7 @@ const InfosPage = ({ place, initialPlaces, placeType }) => {
             alert('Delete successfull', place.name)
         } catch (err) {
             console.log(place._id)
-            alert('Error deleting place:', err)
+            alert('Error delete', err)
         }
     }
 
